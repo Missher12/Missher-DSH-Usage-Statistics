@@ -1,10 +1,10 @@
-/** Link a built Desktop 0.5.10 source tree for reproducible, offline development. */
+/** Link the exact declared versions from a built Harness source tree. */
 import {readFileSync, existsSync, readdirSync, mkdirSync, symlinkSync, realpathSync} from 'node:fs'
 import {resolve, dirname, join} from 'node:path'
 import {fileURLToPath} from 'node:url'
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)))
-if (!process.argv[2]) throw new Error('Usage: node scripts/link-dev.mjs /path/to/built/Desktop-0.5.10-source')
+if (!process.argv[2]) throw new Error('Usage: node scripts/link-dev.mjs /path/to/built/Harness-source')
 const source = realpathSync(process.argv[2])
 const manifest = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
 const packages = new Map()

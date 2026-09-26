@@ -1,9 +1,11 @@
 # 当前状态
 
-2026-09-26：用户要求将截图中的使用统计独立为可安装、可卸载的 Harness 插件。当前包为 `@missher/dsh-usage-statistics` 0.1.0，适配 Desktop 0.5.10 / Harness 0.1.5-rc.2，本地独立仓库；未发布到远端，也未安装到日常配置。
+2026-09-26：用户在本地目录安装时，宿主报告 0.1.0 不兼容 DSH 0.1.7-rc.2。已确认当前应用是用户 Applications 下的 DeepSeek Harness Intel 0.1.7-rc.2。当前插件升级为 **0.2.0**，精确适配此内核；0.1.0 安装包仍留在 dist，适配旧 Desktop 0.5.10 / DSH 0.1.5-rc.2。
 
-代码来自 0.5.10 的 usage-insights 与 ui-settings-usage，原文件 SHA-256 在 provenance.json。插件拥有 usageStatistics Remote、usage.statistics Locale、missher_usage_statistics 派生缓存以及对应 Client 入口。Bundle 只停用内置 ui-settings-usage 页面，原始 Host 服务保持存在，移除插件层即可恢复原页面。
+当前开发依赖链接到已构建的 0.1.7-rc.2 源码，参考 SHA e3409377ac873963595b76c0eb9afd8a8aa241af；旧依赖链接已备份在本仓库 .verification/node_modules-015rc2。不得修改宿主源码、日常数据或其他插件。当前本地根目录可直接用于图形界面安装；未推送远端。
 
-必须保留客户端显式注入 remote.usageStatistics 的子作用域；只调用 remote.$mount 并不足以授权后续读取。客户端 CSS 使用 Cordis effect 安装与撤销。Host 卸载先取消/等待刷新，再关闭缓存域。原生测试和最终包运行时入口通过 SHA-256 绑定。
+插件拥有 usageStatistics Remote、usage.statistics Locale、missher_usage_statistics 派生缓存及 Client 入口。0.1.7-rc.2 没有内置使用统计，Bundle 只插入独立插件；卸载撤销入口。Client 必须 ctx.inject(['remote.usageStatistics'], ...)；新版 Typert codec 必须 create() 工厂，不能退回 schema 属性。所有宿主依赖使用匹配的 peer，不用版本豁免。
 
-验证层级、可重现命令和限制分别见 VALIDATION.md、README.md、INSTALL.md。原生样本数据是隔离合成日志。开发依赖通过 scripts/link-dev.mjs 链接匹配的已构建源树，不改源树；发布包预编译，不依赖开发路径。
+验证：类型检查、64 项测试、目录与 tarball 的完整 CLI profile 安装/读取/卸载、原生目录安装/立即启用/统计图表/卸载均通过。实际验收运行时与当前应用的差异及验证限度见 VALIDATION.md、verification/runtime.json。原生脚本须使用尊重 DSH_HOME 的未包装参考应用；当前 Intel 启动包装会覆盖这个环境变量，不能直接拿它执行隔离测试。
+
+脚本、报告和合成 V4 会话均在本仓库。截图不代表日常用量。运行时代码的校验值在 verification/native.json，最终安装包校验值在 dist/SHA256SUMS。旧 0.1.0 的报告归档在 verification/0.1.0/。

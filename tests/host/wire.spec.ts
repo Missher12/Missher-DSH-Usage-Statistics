@@ -13,7 +13,7 @@ describe('independent statistics Remote', () => {
 
   it('carries the full empty-state result and strips unrelated data from the wire', () => {
     const snapshot = aggregateUsageRows([], {now: Date.now(), timeZone: 'UTC', omittedSessions: 0})
-    const codec = TYPERT_REMOTE.descriptors[0].result.schema
+    const codec = TYPERT_REMOTE.descriptors[0].result.create()
     expect(codec.parse({...snapshot, messageBody: 'not part of a statistics response'})).toEqual(snapshot)
     expect(() => codec.parse({...snapshot, activity: 'invalid'})).toThrow()
   })

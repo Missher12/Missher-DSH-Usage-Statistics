@@ -40,7 +40,7 @@ const userEvent = (seq: number, date: string): SessionEvent => ({
 function stored(id: string, revision: string, events: SessionEvent[]): StoredLog {
   return {
     header: {
-      version: 3,
+      version: 4,
       id: id as SessionId,
       createdAt: Date.parse('2026-01-01T00:00:00.000Z'),
       isSeeded: false,

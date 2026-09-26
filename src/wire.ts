@@ -1,8 +1,9 @@
-/** Snapshot wire schema adapted from the Desktop 0.5.10 generated Remote. */
+/** Snapshot descriptor for the DSH 0.1.7 lazy-codec Remote protocol. */
 import { z } from 'zod'
 import type { TypertRemoteContribution } from '@deepseek-ai/dsh-typert-protocol'
 
-const _deepseek_ai_dsh_usage_insights_usageStatistics_snapshot_result$schema = z.object({
+function snapshotSchema() {
+  return z.object({
   'generatedAt': z.number(),
   'timeZone': z.string(),
   'sessionCount': z.number(),
@@ -36,6 +37,7 @@ const _deepseek_ai_dsh_usage_insights_usageStatistics_snapshot_result$schema = z
   'count': z.number(),
 })),
 })
+}
 
 export const TYPERT_REMOTE = {
   package: '@missher/dsh-usage-statistics',
@@ -51,7 +53,7 @@ export const TYPERT_REMOTE = {
       result: {
         mode: 'strict',
         typeSymbol: '@missher/dsh-usage-statistics/types#UsageInsightsSnapshot',
-        schema: _deepseek_ai_dsh_usage_insights_usageStatistics_snapshot_result$schema,
+        create: snapshotSchema,
       },
       sourceLocation: {"file":"src/index.ts","line":146,"column":3},
     },
