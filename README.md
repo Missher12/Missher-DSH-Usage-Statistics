@@ -1,3 +1,5 @@
+> **源码已迁移 / Source moved:** [dsh-usage-statistics](https://github.com/Missher12/Deepseek-harness-Cordis/tree/main/plugins/dsh-usage-statistics)。后续开发在统一仓库维护。本仓库保留旧提交与下载记录，并只读归档。
+
 # DeepSeek Harness 使用统计
 
 独立、可卸载的 Harness Bundle。统计功能最初从 Desktop 0.5.10 拆分，当前 0.2.0 已适配 Harness 0.1.7-rc.2。安装并启用后，从「更多 → 设置 → 使用统计」打开。
