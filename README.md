@@ -1,5 +1,37 @@
 # DeepSeek Harness 使用统计
 
+[← 桌面端与安装包](https://github.com/Missher12/Missher-DeepseekHarness-Desktop) · [全部插件](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/plugins/README.zh.md) · [通用安装指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/install-cordis-plugins.zh.md)
+
+## 新手上手：使用统计
+
+集中查看不同会话的活动、Token 用量，以及模型、工具和技能的使用情况。
+
+| 你需要知道的事 | 说明 |
+| --- | --- |
+| 插件包名 | `@missher/dsh-usage-statistics` |
+| 当前源码版本 | `0.2.1-local.9` |
+| 装好后在哪里使用 | 设置 → 使用统计 |
+| 下载 / 源码 | [下载 0.2.1-local.9 安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v0.2.1-local.9) |
+
+### 安装、启用与第一次使用
+
+1. 先从[桌面端主页](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)下载适合电脑的应用，完成模型配置。这个仓库是可选插件，不是独立桌面应用。
+2. 阅读[通用安装指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/install-cordis-plugins.zh.md)及本页原有安装说明，核对宿主与插件版本。桌面版使用“插件 → 添加插件”；Web/CLI 使用自己的目标配置组，不混用两种安装位置。
+3. 安装后按宿主提示启用并重新加载，进入上表列出的入口。更新已有插件前保留配置和数据，不同时启用旧包名与新包名。
+4. 打开统计页选择数据范围；方格按天排列，用量越多颜色越深，可在本插件设置中调整颗粒颜色。
+
+### 使用前了解这些边界
+
+它汇总已有记录；没有记录的日期显示淡色空格。它不是供应商账单，缺少用量报告时不能据此确定实际费用。
+
+如果页面或功能没出现，先检查当前应用版本、插件是否启用以及加载错误。反馈时附版本、复现步骤和已脱敏错误；不要上传 API Key、真实会话、账号 Cookie 或学习数据库。Git 中的代码更新不会自动替换电脑上已安装的插件。
+
+### 继续阅读
+
+下文保留本插件的详细行为、配置、开发和验证说明。跨平台是否实际通过，以对应版本的验证记录为准；桌面安装包能启动，不代表全部插件和外部服务都已验收。
+
+---
+
 当前候选 `0.2.1-local.9`：小时活动采用无边框、透明背景，鼠标悬停在柱子上显示该小时准确用量。在 Token 活动下新增今天 0–23 点的小时用量、合计与峰值。配色入口收进标题栏，提供跟随主题、五种预设和自定义颜色，并保留原有颜色偏好与 53×7 颗粒图。
 
 活动图按用量映射五级色阶：用量越高，颜色越深；零用量格保持淡色。每列七格和统计口径不变。
@@ -48,7 +80,7 @@ Token 来源为宿主持久化服务返回的供应商用量，非缓存输入�
 
 ## 开发
 
-开发依赖固定在 `package.json`，本目录的 `pnpm-workspace.yaml` 引用统一仓库内的 SDK。先构建匹配的 DSH 0.2.0-rc.2 SDK，再按[开发指南](https://github.com/Missher12/Missher-DSH-Inter/blob/main/docs/cookbook/build-cordis-plugins.zh.md)完成本插件依赖安装、类型检查、测试、构建与打包。本轮全部构建和测试在隔离副本中运行；也可用 `node scripts/link-dev.mjs /path/to/built-sdk` 只读链接 SDK 中精确匹配的依赖。隔离副本须保留 `vitest.config.ts` 对 `../../vitest.shared.ts` 的引用关系，指向相同 SDK 的共享配置。
+开发依赖固定在 `package.json`，本目录的 `pnpm-workspace.yaml` 引用统一仓库内的 SDK。先构建匹配的 DSH 0.2.0-rc.2 SDK，再按[开发指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/build-cordis-plugins.zh.md)完成本插件依赖安装、类型检查、测试、构建与打包。本轮全部构建和测试在隔离副本中运行；也可用 `node scripts/link-dev.mjs /path/to/built-sdk` 只读链接 SDK 中精确匹配的依赖。隔离副本须保留 `vitest.config.ts` 对 `../../vitest.shared.ts` 的引用关系，指向相同 SDK 的共享配置。
 
 真实隔离 profile 验证脚本是 `scripts/verify-profile.mjs`，要求 `DSH_SOURCE_DIR` 指向已构建的对应宿主，并检查运行时和 SDK 固定的 pnpm 版本（本次为 11.7.0）。脚本通过实际 CLI 安装候选、启动 Host、读取统计、重启、卸载及重装，比较会话和缓存原始字节；单独生成合成数据，不以日常 profile 为测试目标。不运行历史的 `native-snapshot.mjs` 来代替当前宿主的页面验收。
 
