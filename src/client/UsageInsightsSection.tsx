@@ -1,11 +1,14 @@
 import {
-  useEffect, useId, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode,
+  useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent, type ReactNode,
 } from 'react'
 import type { UsageInsightsSnapshot } from '../types.ts'
 import type { InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
 import { buildParticleGrid, type ParticleChartMode } from './charts.ts'
 import { formatCompactNumber, formatDuration, formatModel } from './format.ts'
 import { readUsageSnapshot, writeUsageSnapshot } from './snapshot-cache.ts'
+import { readParticleColor, subscribeParticleColor } from './particle-color.ts'
+import { ParticleColorPicker } from './ParticleColorPicker.tsx'
+import { HourlyActivity } from './HourlyActivity.tsx'
 import css from './UsageInsightsSection.module.css'
 
 /** Registration-side Remote and locale face used by the section. */
@@ -239,6 +242,7 @@ function ActivityChart({ snapshot, mode, locale, t }: {
 export function UsageInsightsSection({ load, locale, t }: UsageInsightsSectionProps): ReactNode {
   const [request, setRequest] = useState(0)
   const [mode, setMode] = useState<ChartMode>('daily')
+  const particleColor = useSyncExternalStore(subscribeParticleColor, readParticleColor)
   const [state, setState] = useState<ViewState>(() => {
     const cached = readUsageSnapshot()
     return cached === undefined
@@ -333,7 +337,7 @@ export function UsageInsightsSection({ load, locale, t }: UsageInsightsSectionPr
       ) : null}
       {snapshot.sessionCount === 0 ? <p className={css.empty}>{t('empty')}</p> : null}
       <div className={css.activityHeader}>
-        <h3>{t('tokenActivity')}</h3>
+        <div className={css.activityTitle}><h3>{t('tokenActivity')}</h3><ParticleColorPicker color={particleColor} t={t} /></div>
         <div className={css.tabs} role="tablist" aria-label={t('tokenActivity')}>
           {modes.map((item, index) => (
             <button
@@ -353,8 +357,11 @@ export function UsageInsightsSection({ load, locale, t }: UsageInsightsSectionPr
           ))}
         </div>
       </div>
-      <div className={css.chartPanel} id={`${panelId}-panel`} role="tabpanel" aria-labelledby={`${panelId}-${mode}-tab`}>
+      <div className={css.chartPanel} style={{ '--usage-particle-color': particleColor || 'var(--dsw-alias-state-business-primary)' } as CSSProperties} id={`${panelId}-panel`} role="tabpanel" aria-labelledby={`${panelId}-${mode}-tab`}>
         <ActivityChart snapshot={snapshot} mode={mode} locale={locale} t={t} />
+      </div>
+      <div style={{ '--usage-particle-color': particleColor || 'var(--dsw-alias-state-business-primary)' } as CSSProperties}>
+        <HourlyActivity key={snapshot.hourly.date} snapshot={snapshot} locale={locale} t={t} refresh={retry} refreshing={state.refreshing} />
       </div>
       <div className={css.detailsGrid}>
         <div>

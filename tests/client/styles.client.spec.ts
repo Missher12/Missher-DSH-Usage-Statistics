@@ -24,10 +24,11 @@ describe('usage heatmap styles', () => {
     expect(styles).toMatch(/\.detailsGrid\s*\{[^}]*margin-top:\s*44px/s)
   })
 
-  it('keeps all 53 by 7 zero-usage particles visible', () => {
+  it('keeps the original 53 by 7 geometry with theme-aware idle particles', () => {
     expect(styles).toMatch(/\.heatmap\s*\{[^}]*grid-template-rows:\s*repeat\(7,/s)
     expect(styles).toMatch(/\.heatmap\s*\{[^}]*grid-auto-flow:\s*column/s)
-    expect(styles).toMatch(/\.heatmap\s*\{[^}]*aspect-ratio:\s*53\s*\/\s*7/s)
+    expect(styles).toMatch(/\.heatmap\s*\{[^}]*gap:\s*3px/s)
+    expect(styles).toMatch(/\.day\s*\{[^}]*aspect-ratio:\s*1/s)
     expect(styles).toMatch(/\.heatmapWeek\s*\{[^}]*display:\s*contents/s)
     expect(styles).toMatch(/\.day\s*\{[^}]*background:\s*var\(--dsw-alias-bg-skeleton\)/s)
     expect(styles).not.toMatch(/\.weekly\s*\{/)
@@ -35,5 +36,13 @@ describe('usage heatmap styles', () => {
     expect(styles).toMatch(/\.heatmapStage\s*\{[^}]*position:\s*relative/s)
     expect(styles).toMatch(/\.tooltip\s*\{[^}]*position:\s*absolute/s)
     expect(styles).toMatch(/\.tooltip\s*\{[^}]*border-radius:\s*8px/s)
+  })
+
+  it('darkens every higher usage level in both themes', () => {
+    const levels = [...styles.matchAll(/\.day\[data-level='([1-5])'\]\s*\{[^}]*background:\s*oklch\(from [^;]*?\s(\.\d+)\s/g)]
+    expect(levels).toHaveLength(5)
+    expect(levels.map(match => Number(match[1]))).toEqual([1, 2, 3, 4, 5])
+    const lightness = levels.map(match => Number(match[2]))
+    for (let i = 1; i < lightness.length; i++) expect(lightness[i]).toBeLessThan(lightness[i - 1]!)
   })
 })

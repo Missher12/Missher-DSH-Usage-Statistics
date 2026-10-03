@@ -1,0 +1,21 @@
+{
+  "version": "0.2.1-local.9",
+  "sourceRepository": "Missher12/Missher-DSH-Inter",
+  "sourceCommit": "383913fe07cac9a5de38fc26e2fb003ef42d977d",
+  "sourceAdditionalFix": null,
+  "acceptedPackageSha256": "607c4991c1dd2b012a4e364eea8872d3c077dc61c2728653381581becb883893",
+  "runtimeFiles": [
+    {
+      "path": "lib/client.js",
+      "sha256": "25893b241a6b71678b15f4198a14ca207da77efd28fe75906ba8706b3d3596d9"
+    },
+    {
+      "path": "lib/index.js",
+      "sha256": "59afaec927018dd0e96055856628a79373dcd57ba0f3e2504a523b598f52c2a0"
+    },
+    {
+      "path": "lib/typert.js",
+      "sha256": "eeedcd48346763042ff1d9e43a957e3eb0c92be4d20a5573f5fa86a86d4dd716"
+    }
+  ]
+}

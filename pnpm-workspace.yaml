@@ -1,0 +1,27 @@
+# Build this Bundle independently against the explicit harness-sdk development link.
+# Runtime dependency declarations remain in package.json.
+packages:
+  - .
+allowBuilds:
+  esbuild: true
+overrides:
+  '@deepseek-ai/cordis': 'link:./harness-sdk/vendor/cordis'
+  '@deepseek-ai/cordis-plugin-include': 'link:./harness-sdk/vendor/include'
+  '@deepseek-ai/cordis-plugin-loader': 'link:./harness-sdk/vendor/loader'
+  '@deepseek-ai/dsh-api-remotes': 'link:./harness-sdk/packages/api/remotes'
+  '@deepseek-ai/dsh-app-boot': 'link:./harness-sdk/packages/boot/app-boot'
+  '@deepseek-ai/dsh-client-locale': 'link:./harness-sdk/packages/client/locale'
+  '@deepseek-ai/dsh-client-ui-primitives': 'link:./harness-sdk/packages/client/ui-primitives'
+  '@deepseek-ai/dsh-client-ui-renderer': 'link:./harness-sdk/packages/client/ui-renderer'
+  '@deepseek-ai/dsh-client-ui-settings': 'link:./harness-sdk/packages/client/ui-settings'
+  '@deepseek-ai/dsh-client-ui-slots': 'link:./harness-sdk/packages/client/ui-slots'
+  '@deepseek-ai/dsh-llm': 'link:./harness-sdk/packages/llm/llm'
+  '@deepseek-ai/dsh-session': 'link:./harness-sdk/packages/core/session'
+  '@deepseek-ai/dsh-session-persistence': 'link:./harness-sdk/packages/session/session-persistence'
+  '@deepseek-ai/dsh-session-persistence-jsonl': 'link:./harness-sdk/packages/session/session-persistence-jsonl'
+  '@deepseek-ai/dsh-storage': 'link:./harness-sdk/packages/storage/storage'
+  '@deepseek-ai/dsh-storage-domain': 'link:./harness-sdk/packages/storage/storage-domain'
+  '@deepseek-ai/dsh-storage-json': 'link:./harness-sdk/packages/storage/storage-json'
+  '@deepseek-ai/dsh-typert-loader': 'link:./harness-sdk/packages/typert/loader'
+  '@deepseek-ai/dsh-typert-protocol': 'link:./harness-sdk/packages/typert/protocol'
+  '@deepseek-ai/schemastery': 'link:./harness-sdk/vendor/schemastery'
