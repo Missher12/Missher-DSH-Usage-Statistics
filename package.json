@@ -1,7 +1,7 @@
 {
   "name": "@missher/dsh-usage-statistics",
-  "version": "0.2.1-local.9",
-  "description": "Independent local usage statistics for DeepSeek Harness 0.2.0-rc.1 / 0.2.0-rc.2",
+  "version": "0.2.1",
+  "description": "Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.",
   "type": "module",
   "license": "MIT",
   "main": "lib/index.js",
@@ -9,6 +9,7 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
+    "README.en.md",
     "INSTALL.md",
     "VALIDATION.md",
     "LICENSE",
@@ -91,5 +92,15 @@
     "type": "git",
     "url": "git+https://github.com/Missher12/Missher-DSH-Usage-Statistics.git"
   },
-  "homepage": "https://github.com/Missher12/Missher-DSH-Usage-Statistics"
+  "homepage": "https://github.com/Missher12/Missher-DSH-Usage-Statistics",
+  "bugs": {
+    "url": "https://github.com/Missher12/Missher-DSH-Usage-Statistics/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "usage-statistics",
+    "tokens"
+  ],
+  "packageManager": "pnpm@11.7.0"
 }

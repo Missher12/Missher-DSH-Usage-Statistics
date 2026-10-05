@@ -1,95 +1,70 @@
 # DeepSeek Harness 使用统计
 
-[← 桌面端与安装包](https://github.com/Missher12/Missher-DeepseekHarness-Desktop) · [全部插件](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/plugins/README.zh.md) · [通用安装指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/install-cordis-plugins.zh.md)
+[English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
-## 新手上手：使用统计
+汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
 
-集中查看不同会话的活动、Token 用量，以及模型、工具和技能的使用情况。
+独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前源码/上架包版本为 **0.2.1**；公开可下载版本以 Releases 为准。
 
-| 你需要知道的事 | 说明 |
-| --- | --- |
-| 插件包名 | `@missher/dsh-usage-statistics` |
-| 当前源码版本 | `0.2.1-local.9` |
-| 装好后在哪里使用 | 设置 → 使用统计 |
-| 下载 / 源码 | [下载 0.2.1-local.9 安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v0.2.1-local.9) |
+## 功能
 
-### 安装、启用与第一次使用
+- 累计 Token、峰值每日 Token、最长会话有效耗时、当前与最长连续聊天天数。
+- 最近 53 周的 53×7 颗粒图，支持每日、每周、累计视图与精确用量提示。
+- 今天 0–23 点的小时柱状图，无外框；悬停查看时段和准确 Token 数，方向键切换小时，支持手动刷新。
+- 颗粒与小时图共用颜色偏好：跟随主题、五种预设或自定义颜色。
+- 缓存命中率、常用模型与推理强度、工具/技能调用排行；读不到的会话或缺少的用量明确提示。
+- 中文与英文，宿主浅色/深色主题，上次统计快照与失败重试。
 
-1. 先从[桌面端主页](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)下载适合电脑的应用，完成模型配置。这个仓库是可选插件，不是独立桌面应用。
-2. 阅读[通用安装指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/install-cordis-plugins.zh.md)及本页原有安装说明，核对宿主与插件版本。桌面版使用“插件 → 添加插件”；Web/CLI 使用自己的目标配置组，不混用两种安装位置。
-3. 安装后按宿主提示启用并重新加载，进入上表列出的入口。更新已有插件前保留配置和数据，不同时启用旧包名与新包名。
-4. 打开统计页选择数据范围；方格按天排列，用量越多颜色越深，可在本插件设置中调整颗粒颜色。
+## 宿主与平台
 
-### 使用前了解这些边界
+依赖 DSH **0.2.0-rc.2** 的 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives。插件没有调用 Missher 专属扩展接口，也不需要额外兼容插件。
 
-它汇总已有记录；没有记录的日期显示淡色空格。它不是供应商账单，缺少用量报告时不能据此确定实际费用。
+现有安装/Loader/通信及受控浏览器证据来自 **macOS Intel、基于 rc.2 的 Missher SDK/桌面环境**。0.2.1 沿用已验收的 `0.2.1-local.9` 三份运行入口；本次只整理发布元数据和文档。**纯官方完整应用、Windows、Linux、Apple Silicon 和官方 alpha.1 未用本版本独立验收。** 不把桌面应用本身的跨平台测试算成本插件的测试。详细层级见 [VALIDATION.md](VALIDATION.md)。
 
-如果页面或功能没出现，先检查当前应用版本、插件是否启用以及加载错误。反馈时附版本、复现步骤和已脱敏错误；不要上传 API Key、真实会话、账号 Cookie 或学习数据库。Git 中的代码更新不会自动替换电脑上已安装的插件。
+DSH peer 保留 `*`，不会仅凭版本号拒绝宿主；这不代表所有版本兼容。缺少上述接口时应保留正常加载错误，不使用版本豁免。
 
-### 继续阅读
+## 安装、启用与卸载
 
-下文保留本插件的详细行为、配置、开发和验证说明。跨平台是否实际通过，以对应版本的验证记录为准；桌面安装包能启动，不代表全部插件和外部服务都已验收。
+1. 从 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 下载所选版本的 `missher-dsh-usage-statistics-<版本>.tgz`，使用同版 `SHA256SUMS` 核对文件。GitHub 自动生成的 Source code 压缩包不是插件安装包。
+2. 桌面版进入 **插件 → 添加插件 → 包名或地址**，填写下载的 `.tgz` 绝对路径；也可以填写该文件的公开下载 URL。安装包包含全部运行入口，安装不需要构建或本机 SDK。
+3. 按宿主提示启用/重新加载，打开 **设置 → 使用统计**。有历史记录时会汇总已有用量；没有记录时显示空状态。
+4. 在插件管理页关闭本插件的启用开关可停用，重新打开可恢复。宿主未启用热加载时，按提示正常重启后生效。
+5. 在同一插件管理页卸载 `@missher/dsh-usage-statistics`，页面、服务和样式随插件生命周期撤销。停用或卸载不会删除原始会话、模型配置或凭据；可重建缓存与颜色偏好会保留。
 
----
+更新前保存当前 profile 的备份；更新时沿用相同包名，勿同时安装旧命名副本。CLI、Git 安装和本地目录的区别见 [INSTALL.md](INSTALL.md)。
 
-当前候选 `0.2.1-local.9`：小时活动采用无边框、透明背景，鼠标悬停在柱子上显示该小时准确用量。在 Token 活动下新增今天 0–23 点的小时用量、合计与峰值。配色入口收进标题栏，提供跟随主题、五种预设和自定义颜色，并保留原有颜色偏好与 53×7 颗粒图。
+## 数据与统计口径
 
-活动图按用量映射五级色阶：用量越高，颜色越深；零用量格保持淡色。每列七格和统计口径不变。
+只统计当前 Harness 数据目录中能读取的本地会话，不汇总其他电脑，不查询账户额度或费用。统计来自供应商已报告的 Token 用量，不是账单或估算。
 
-自家插件不再限制 DSH 宿主版本号；运行时按实际接口能力工作。开发依赖版本用于复现构建，不是安装门槛。本轮验证基线为 0.2.0-rc.2，其他版本没有用本候选重测。
+- 计入非缓存输入、输出、缓存读取和缓存写入；推理 Token 不在输出之外重复相加。缺少用量不推算。有报告的失败尝试和重试计入，同一尝试的重复结算去重，派生会话继承前缀不重复计数。
+- 每日与小时图使用相同时区，默认系统时区。小时归属取有效用量事件的记录时间，不把跨小时请求平均分摊；夏令时重复小时合并，跳过小时为零。打开页面或点击刷新重新读取；旧日期缓存不会被标成“今天”。
+- 缓存命中率 = 缓存读取 Token / 全部输入 Token。最长会话只合计已完成轮次的有效耗时，不含轮次间空闲。
+- 模型/推理强度表示历史记录里最常用的值，不代表当前默认设置或模型能力。工具与技能混合排行只展示前 5 项。
 
-独立、可卸载的 Harness Bundle。统计功能最初从 Desktop 0.5.10 拆分，当前本地候选 **0.2.1-local.9** 在 **DSH 0.2.0-rc.2** 验证。安装并启用后，从「设置 → 使用统计」打开。
+Host 经宿主持久化服务读取记录，只写本插件的 `missher_usage_statistics` 派生缓存（域 1、行 4）。浏览器保存统计快照和颜色偏好；旧缓存可重新生成。它不直接扫描私有日志格式，不修改原始会话，不修复或迁移历史日志。不可读记录会显示为省略。
 
-- 累计 Token、峰值每日 Token、最长会话有效耗时、当前/最长连续聊天天数。
-- 最近 53 周的每日、每周和累计 Token 颗粒活动图，支持悬停查看日期与用量。保持 53 列、每列 7 个正方格，常规间距 3 px、窄屏 2 px：无用量颗粒使用淡色空格，有用量按单色从淡到深。
-- 今天 24 小时的实际 Token 用量；悬停/点击查看准确数字，方向键切换小时，可手动刷新。
-- 缓存命中率、常用模型、常用推理强度、技能数、工具调用数和聊天天数。
-- Skill 与工具排行，以及不可读取会话、缺失用量记录的明确提示。
-- 中文/英文、宿主浅色/深色主题、加载/失败重试及上次结果缓存。
-
-## 兼容与安装
-
-本候选验证基线为 **DSH 0.2.0-rc.2**；rc.1 是前版的验证记录，本轮未重测。实际验证记录见 [VALIDATION.md](VALIDATION.md)。插件 0.2.0 对应 DSH 0.1.7-rc.2；插件 0.1.0 对应 Desktop 0.5.10 / DSH 0.1.5-rc.2。使用正常安装流程，不需要版本豁免；旧交付包的限制保持原样。
-
-参见 [INSTALL.md](INSTALL.md)。本轮交付隔离构建的 `missher-dsh-usage-statistics-0.2.1-local.9.tgz`，包含 Host、Client、Typert 通信描述和 Bundle 配置，不需要安装时构建。维护目录的 `lib` 保留原字节，不能将此源码目录直接作为本轮候选安装。插件没有新增兼容包或其他插件依赖。
-
-插件通过自己的 `usageStatistics` Remote 服务读取宿主 `sessionPersistence`，在自己的 `missher_usage_statistics` 缓存中保存可重建的聚合数据。插件新增自己的「使用统计」入口；移除插件后撤销页面和服务。插件不直接写入会话日志、模型设置或凭据。缓存域仍为版本 1；为保存准确的小时用量，派生行格式更新为 4，旧行通过持久化服务重新折叠。浏览器快照键保留，信封版本更新为 2；旧快照重取，不补造小时数据。原始会话及颜色偏好保持。
-
-## 数据口径
-
-小时图按每条被接受的供应商用量事件的记录时间归属，汇总所有会话的今天 0–23 点，使用与每日活动相同的时区和去重规则。它表示用量记录落在哪个小时，不将一次跨小时请求的 Token 平摊到持续时间内。夏令时重复的小时合并，跳过的小时为零；未报告用量不推算。每个小时可查看准确数字；下方显示时区，缓存的过往日期不会标为今天。打开页面或点击小时图右上角刷新按钮可重取数据。
-
-Token 来源为宿主持久化服务返回的供应商用量，非缓存输入、输出、缓存读取、缓存写入分别计数，推理 Token 不在输出之外重复相加。未报告的用量不推算；有用量记录的失败尝试和重试分别计数，同一尝试的重复结算去重。派生会话继承的事件前缀不重复统计。最长会话为已完成轮次的有效耗时之和，不包含轮次之间的空闲时间。日期按系统时区聚合，可通过插件配置指定 IANA 时区。
-
-统计只覆盖当前 Harness 数据目录中可读取的本地会话，不是账户账单，也不汇总其他电脑。损坏、更新版本或不支持的会话将显示为省略；历史格式的读取和迁移由宿主持久化服务决定，插件没有自己的迁移或修复逻辑。导入/删除日志或改变时区会重建有关缓存。汇总指标使用全部可读历史，活动图使用按周对齐的 371 天窗口；当前工具/技能混合排行只返回前 5 项，页面缓存的 50 项校验上限不是展示数量。不返回消息正文、完整工具参数或密钥。
-
-缓存命中率为缓存读取 Token 除以全部输入 Token（非缓存输入 + 缓存读取 + 缓存写入）。常用模型和推理强度从已记录的请求头读取，并按可识别的回复/用量尝试归属计数；它们不代表当前默认值或模型支持的最高档位。
-
-### 职责边界
-
-本插件负责跨会话统计及自己的设置页，不负责通用 UI、模型能力配置或当前会话上下文详情。
-
-| 项目 | 使用统计插件 | context-manager |
-| --- | --- | --- |
-| 范围 | 当前数据目录的全部可读会话 | 用户选定的单个会话 |
-| 用量来源 | 宿主 `sessionPersistence`，折叠各会话自有事件后聚合 | 宿主 `sessionQuery` 返回的 `tokenUsage` 投影；历史截面不补造累计值 |
-| 页面内容 | 总量、活动、常用模型/推理强度和工具/技能排行 | 当前窗口占用、有效内容截面、逐次回复和本会话累计用量 |
-| 继承记录 | 排除继承前缀，避免跨会话重复归账 | 沿用选定会话的宿主投影口径，不作为跨会话去重结果 |
-
-两者的「累计」作用域不同，不要求数字相等，也不建立相互运行依赖。统计会计入已报告用量的重试；逐次回复列表与累计用量不是同一个列表。独立摘要调用未形成这些主请求用量事件时，不会凭估算补入。模型能力设置、详情默认展开分别由模型设置与 context-manager 负责；使用统计不接管模型服务的峰谷提示。
+插件不注册模型工具、不注入提示词、不调用模型，也不向外部上传统计。它没有跨设备同步、费用预测或当前会话上下文管理功能。大量历史记录首次统计可能较慢；默认刷新预算为 12 秒。高级配置 `timeZone` 可指定 IANA 时区，`refreshTimeoutMs` 范围为 10–60000 毫秒。
 
 ## 开发
 
-开发依赖固定在 `package.json`，本目录的 `pnpm-workspace.yaml` 引用统一仓库内的 SDK。先构建匹配的 DSH 0.2.0-rc.2 SDK，再按[开发指南](https://github.com/Missher12/Missher-DeepseekHarness-Desktop/blob/main/docs/cookbook/build-cordis-plugins.zh.md)完成本插件依赖安装、类型检查、测试、构建与打包。本轮全部构建和测试在隔离副本中运行；也可用 `node scripts/link-dev.mjs /path/to/built-sdk` 只读链接 SDK 中精确匹配的依赖。隔离副本须保留 `vitest.config.ts` 对 `../../vitest.shared.ts` 的引用关系，指向相同 SDK 的共享配置。
+普通安装直接使用成品 `.tgz`。源码开发使用 Node.js 和 pnpm 11.7.0，以及一个已构建的 DSH 0.2.0-rc.2 SDK：
 
-真实隔离 profile 验证脚本是 `scripts/verify-profile.mjs`，要求 `DSH_SOURCE_DIR` 指向已构建的对应宿主，并检查运行时和 SDK 固定的 pnpm 版本（本次为 11.7.0）。脚本通过实际 CLI 安装候选、启动 Host、读取统计、重启、卸载及重装，比较会话和缓存原始字节；单独生成合成数据，不以日常 profile 为测试目标。不运行历史的 `native-snapshot.mjs` 来代替当前宿主的页面验收。
+```sh
+node scripts/link-harness.mjs /absolute/path/to/built-harness
+pnpm install --frozen-lockfile
+pnpm typecheck
+pnpm test --maxWorkers=1
+pnpm build
+pnpm pack:bundle
+```
 
-发布包不包含开发依赖或本机绝对路径。Cordis、Schemastery 和 DSH 服务由宿主提供，由 peer 声明引用；DSH peer 不限制宿主版本号，不下载另一份宿主。`provenance.json` 记录最初拆分来源和原文件校验值。MIT 许可证及上游授权保存在 `LICENSE`、`licenses/`；Client 内包含的 Zod 4.4.3 许可证见 `licenses/zod-MIT.txt`。
+SDK 链接 `harness-sdk`、开发依赖和本机路径均不进入成品包。验证正在使用的源码时应在独立副本中运行，避免重建日常链接的 `lib`。隔离安装验证入口为 `DSH_SOURCE_DIR=/absolute/path/to/built-harness node scripts/verify-profile.mjs`；脚本只创建自己的测试 profile。
 
-## 模型影响与限制
+## 来源与反馈
 
-插件不注册模型工具，不注入提示词，不调用模型，不增加请求 Token。刷新统计时会读取本地日志并更新独立派生缓存；大量历史日志首次读取可能较慢，默认有 12 秒刷新预算，部分读取失败会明确显示。卸载保留可重建的缓存，不清理用户数据。没有费用估算、跨设备同步或账户额度查询。
+MIT 许可。使用统计的初始实现从 Desktop 0.5.10 / Harness 0.1.5-rc.2 拆出，提取修订为 `ca0085cabd778685b83c79ff40e49d637014b28f`。后续适配、小时活动与配色由本插件维护。原文件与校验值见 [provenance.json](provenance.json)。
 
-## 独立源码开发
+保留 [本项目 MIT](LICENSE)、[DeepSeek 上游 MIT](licenses/deepseek-harness-MIT.txt) 和 [Zod MIT](licenses/zod-MIT.txt)；浏览器入口包含 Zod 4.4.3。Cordis、Schemastery 与 DSH 服务由宿主依赖提供。
 
-运行包已包含 lib，使用时不需要开发环境。修改源码需 Node 和本仓库 packageManager 指定的 pnpm；先运行 `node scripts/link-harness.mjs /绝对路径/已构建的Missher-DSH-Inter`，再执行 `pnpm install --frozen-lockfile`，随后使用 package.json 中的 typecheck、build 和 test。SDK 链接只写本插件开发目录；harness-sdk 不提交、不进入安装包。
+问题反馈请附宿主/插件版本、平台、复现步骤和脱敏错误：[Issues](https://github.com/Missher12/Missher-DSH-Usage-Statistics/issues)。请勿附带密钥或真实会话内容。

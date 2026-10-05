@@ -1,0 +1,160 @@
+{
+  "task": "MARKET-20261005",
+  "checkedAt": "2026-10-05",
+  "package": "@missher/dsh-usage-statistics",
+  "version": "0.2.1",
+  "sourceRepository": "https://github.com/Missher12/Missher-DSH-Usage-Statistics",
+  "sourceBaseCommit": "66ddafd3fe1405807055c32f3766fc92894dfbb6",
+  "changeScope": "Package metadata, bilingual installation/support documentation and validation records only; src, lib, tests and scripts unchanged.",
+  "packaging": {
+    "version": "0.2.1",
+    "sha256": "337811bdbf79bd6980fb6165d5f86607e9c9f13f07338a30384641ef9d6334b3",
+    "fileCount": 13,
+    "files": [
+      "INSTALL.md",
+      "LICENSE",
+      "README.en.md",
+      "README.md",
+      "VALIDATION.md",
+      "cordis.patch.yml",
+      "lib/client.js",
+      "lib/index.js",
+      "lib/typert.js",
+      "licenses/deepseek-harness-MIT.txt",
+      "licenses/zod-MIT.txt",
+      "package.json",
+      "provenance.json"
+    ],
+    "bundleManifest": true,
+    "runtimeEntriesMatchValidatedLocal9": {
+      "lib/index.js": "59afaec927018dd0e96055856628a79373dcd57ba0f3e2504a523b598f52c2a0",
+      "lib/client.js": "25893b241a6b71678b15f4198a14ca207da77efd28fe75906ba8706b3d3596d9",
+      "lib/typert.js": "eeedcd48346763042ff1d9e43a957e3eb0c92be4d20a5573f5fa86a86d4dd716"
+    },
+    "runtimeDependencies": {
+      "zod": "4.4.3"
+    },
+    "peerDependencies": {
+      "@deepseek-ai/cordis": "4.0.4",
+      "@deepseek-ai/dsh-storage-domain": "*",
+      "@deepseek-ai/dsh-typert-protocol": "*",
+      "@deepseek-ai/dsh-session-persistence": "*",
+      "@deepseek-ai/schemastery": "3.18.4",
+      "@deepseek-ai/dsh-client-ui-primitives": "*"
+    },
+    "hasInstallBuildScript": false,
+    "hasLocalRuntimePathOrLink": false,
+    "licensesAndProvenanceIncluded": true,
+    "readmeLanguages": [
+      "zh",
+      "en"
+    ],
+    "localMarkdownLinksResolve": true,
+    "packageFilesMatchSourceAndCandidate": true,
+    "documentationTestWorkerBoundCorrected": true,
+    "artifact": "missher-dsh-usage-statistics-0.2.1.tgz"
+  },
+  "compatibilityTests": {
+    "file": "tests/host/compatibility.spec.ts",
+    "passed": 5,
+    "failed": 0,
+    "maxWorkers": 1
+  },
+  "installation": {
+    "runtime": "0.2.0-rc.2",
+    "pnpmVersion": "11.7.0",
+    "version": "0.2.1",
+    "installKind": "tarball",
+    "artifactSha256": "337811bdbf79bd6980fb6165d5f86607e9c9f13f07338a30384641ef9d6334b3",
+    "install": true,
+    "loaderBoot": true,
+    "hostSnapshotRead": true,
+    "syntheticTokens": 30000,
+    "cacheHitRate": 0.76,
+    "uninstallRestoresBase": true,
+    "pluginServiceRemoved": true,
+    "sessionBytesUnchanged": true,
+    "cacheDomainVersion": 1,
+    "cacheRowVersion": 4,
+    "legacyV3RebuiltWithoutSessionWrites": true,
+    "hourlyTokens": 30000,
+    "cacheBytesUnchangedAfterRestartRemoveReinstall": true,
+    "reinstallRestoresStatistics": true,
+    "realModel": false
+  },
+  "host": {
+    "version": "0.2.0-rc.2",
+    "sdkFlavor": "Missher rc.2-based SDK",
+    "sdkCommit": "a99abedb4206d93a3c2e65c10fafa403961c46bf",
+    "officialReferenceCommit": "639ed015397290b3745d163aafe02ffee4aa3f84",
+    "platform": "macOS Intel x86_64",
+    "nodeVersion": "25.6.0",
+    "pnpmVersion": "11.7.0",
+    "apiInspection": "sessionPersistence, storageDomain, Typert Remote, settings.section, Tooltip and Menu use public rc.2 contracts; no plugin calls to the added private delete/inventory APIs."
+  },
+  "reusedEvidence": {
+    "date": "2026-10-03",
+    "basis": "All three runtime entry hashes match the final local.9 UI candidate and the public local.9 asset. No new UI or native run in this packaging task.",
+    "logicTests": {
+      "version": "0.2.1-local.8",
+      "passed": 77
+    },
+    "clientTests": {
+      "version": "0.2.1-local.9",
+      "passed": 30
+    },
+    "ui": {
+      "particles": 371,
+      "hourBars": 24,
+      "frameBorder": "0px",
+      "frameBackground": "transparent",
+      "hoverWithoutClick": true,
+      "zeroHourTooltip": true,
+      "closesOnMouseLeave": true,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "viewportWidth": 640,
+      "sectionClientWidth": 351,
+      "sectionScrollWidth": 351
+    },
+    "frozenLocal9ArtifactSha256": "607c4991c1dd2b012a4e364eea8872d3c077dc61c2728653381581becb883893"
+  },
+  "previousPublicRelease": {
+    "version": "0.2.1-local.9",
+    "url": "https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/download/v0.2.1-local.9/missher-dsh-usage-statistics-0.2.1-local.9.tgz",
+    "sha256": "a85e5fdda47aeb7922eb943822d54a022ef240a335935a48daf338251712b39e",
+    "anonymousDownloadVerified": true,
+    "overwritten": false,
+    "hasChecksumSidecar": false
+  },
+  "repositoryEligibility": {
+    "public": true,
+    "archived": false,
+    "createdAt": "2026-09-27T16:06:24Z",
+    "ageOver24Hours": true,
+    "topic": "dsh-plugin",
+    "topicVerified": true
+  },
+  "marketplace": {
+    "category": "usage",
+    "descriptionZh": "汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。",
+    "descriptionEn": "Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.",
+    "submissionOwner": "coordinator",
+    "pluginOwnerBlockers": []
+  },
+  "boundaries": {
+    "dailyApplicationModified": false,
+    "dailyProfileModified": false,
+    "realModelUsed": false,
+    "nativeUiTestedThisRun": false,
+    "fullOfficialApplicationTested": false,
+    "windowsTested": false,
+    "linuxTested": false,
+    "appleSiliconTested": false,
+    "officialAlpha1Tested": false,
+    "releaseCreatedByPluginOwner": false,
+    "marketplacePrCreatedByPluginOwner": false
+  }
+}

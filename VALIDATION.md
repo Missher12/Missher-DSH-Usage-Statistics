@@ -1,4 +1,25 @@
-# 0.2.1-local.9：小时活动去框（2026-10-03）
+# 0.2.1：上架包装 / Marketplace packaging（2026-10-05）
+
+0.2.1 只更新包元数据与中英文说明；全部 src/lib 与 local.9 一致，没有增加缓存迁移或改变宽松 DSH peer 准入。三份运行入口逐字节对照 2026-10-03 最终验收包与公开 v0.2.1-local.9 资产。公开旧 tgz 的 SHA256 为 `a85e5fdda47aeb7922eb943822d54a022ef240a335935a48daf338251712b39e`；发布说明变化导致它与早期验收 tgz 的整体哈希不同，不代表运行代码改变。
+
+Version 0.2.1 changes package metadata and documentation only. All source/runtime bytes match local.9. The earlier UI evidence is reused through runtime-byte parity; it is not described as a new native or cross-platform test.
+
+| 层级 / Layer | 范围 / Scope |
+| --- | --- |
+| 本轮包装 / Packaging | Bundle manifest、三入口、依赖、双语 README、三份 MIT 许可及 provenance；不包含 SDK/开发链接、绝对运行路径或安装构建脚本 |
+| 本轮安装 / Installation | 固定 tgz 在独立 rc.2 profile 上通过实际 CLI、Loader/快照及安装生命周期检查；精确哈希与机器回执随发布交付 |
+| 复用统计逻辑 / Reused logic | 2026-10-03 local.8 的 77 项测试与 local.9 的 30 项客户端检查；Host/Typert 与 local.8 一致 |
+| 复用界面 / Reused UI | 2026-10-03 最终 local.9，371 颗粒、24 小时、准确悬停和零用量、移出关闭、深浅主题；640px 下小时区宽度/滚动宽度均为 351 |
+| 宿主来源 / Host | 基于 DSH 0.2.0-rc.2 的 Missher SDK/桌面；使用官方公开接口，不调用 SDK 新增的私有删除或插件清单扩展 |
+| 平台 / Platform | macOS Intel；Windows/Linux/Apple Silicon、纯官方完整应用和官方 alpha.1 未独立验收 / not independently verified |
+
+本次不更改日常应用、profile、会话、学习库或凭据，不调用真实模型。新版本发布与市场合并由协调者处理；准备好安装包不等于已经上架。
+
+No daily installation or user data is changed by this packaging task. A prepared archive, a published Release, a merged catalog PR and a searchable listing are separate acceptance stages.
+
+以下保留历史验证，旧路径和当时安装状态不表示当前状态。
+
+# 0.2.1-local.9：小时活动去框（2026-10-03，历史）
 
 本次只修改小时活动区域的 CSS，去掉边框、底色、圆角和内边距；保留原生 Tooltip、24 小时数据、刷新和配色。验证重点为隔离类型检查/客户端测试/构建、实际 Host 加载、鼠标移入即显示准确数值、移出关闭，以及深浅主题和桌面窄窗口。精确包校验值、当轮结果与截图见独占回执 `coordination/2026-10-03/usage-hourly-frameless/DELIVERY.md`。
 
