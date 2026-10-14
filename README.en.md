@@ -1,10 +1,10 @@
 # DeepSeek Harness Usage Statistics
 
-[简体中文](README.md) · [Downloads](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [Desktop application](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
+[简体中文](README.md) · [Downloads](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) · [Desktop application](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.
 
-An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. The current source/package version is **0.2.1**; see Releases for versions available to download.
+An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. The current formal release is **0.2.1**; use Latest for future updates.
 
 ## Features
 
@@ -17,15 +17,15 @@ An independently installable, removable Harness Bundle named `@missher/dsh-usage
 
 ## Host and platform support
 
-Requires the DSH **0.2.0-rc.2** `sessionPersistence`, `storageDomain`, Typert Remote, `settings.section` and native UI primitives APIs. The plugin does not call Missher-only extension APIs or require a separate compatibility plugin.
+Requires DSH `sessionPersistence`, `storageDomain`, Typert Remote, `settings.section` and native UI primitives APIs. Maintenance targets a reasonable Host range and continued adaptation to the latest release, based on these capabilities. The rc.2 baseline is a historical test record, not the only intended compatible version. No Missher-only API or separate compatibility plugin is required.
 
-Existing installation, Loader, RPC and controlled-browser evidence comes from **Intel macOS with the rc.2-based Missher SDK/Desktop environment**. Version 0.2.1 retains the three validated runtime entry points from `0.2.1-local.9`; this release updates packaging and documentation only. **The full unmodified official app, Windows, Linux, Apple Silicon and official alpha.1 have not been independently validated with this version.** Desktop application tests are not treated as plugin tests. See [VALIDATION.md](VALIDATION.md) for evidence boundaries.
+Historical installation, Loader, RPC and controlled-browser evidence comes from Intel macOS with the rc.2 environment. Version 0.2.1 retains the three validated runtime entry points from `0.2.1-local.9`. It is also installed and active on Ubuntu companion Desktop `0.2.1-alpha.2.20261014.1`, with installed files matching the public archive. Other platforms, the full unmodified official app and complete native chart interaction require separate acceptance. Desktop tests are not plugin tests. See [VALIDATION.md](VALIDATION.md) for historical evidence.
 
-DSH peer ranges remain `*`, so a host is not rejected by its version number alone. This is not a promise of compatibility with every version. Missing required APIs should remain ordinary loading errors; no compatibility bypass is needed.
+DSH peers remain `*`, while this package retains historical exact Cordis / Schemastery declarations in `package.json`. Permissive DSH peers do not establish all-version support; missing required APIs must produce accurate loading errors. This page describes the current formal release and installation evidence. Existing archives and validation records retain their original status.
 
 ## Install and use
 
-1. Download `missher-dsh-usage-statistics-<version>.tgz` from [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) and verify it against that release's `SHA256SUMS`. GitHub's automatic Source code archives are not the plugin installer.
+1. Download `missher-dsh-usage-statistics-<version>.tgz` from [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) and verify it against that release's `SHA256SUMS`. GitHub's automatic Source code archives are not the plugin installer.
 2. In Desktop, open **Plugins → Add plugin → Package name or address**. Enter the downloaded archive's absolute path, or its public download URL. The archive includes all runtime entry points; users do not need to build it or provide an SDK.
 3. Enable/reload when prompted, then open **Settings → Usage Statistics**. Existing records are aggregated; an empty profile shows an empty state.
 4. Turn off the plugin's enable switch in plugin management to disable it. Turn it back on to restore it. If the host is not using hot reload, restart normally when prompted.

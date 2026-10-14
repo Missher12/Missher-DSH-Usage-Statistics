@@ -1,10 +1,10 @@
 # DeepSeek Harness 使用统计
 
-[English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
+[English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
 
-独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前源码/上架包版本为 **0.2.1**；公开可下载版本以 Releases 为准。
+独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前正式交付版本为 **0.2.1**；后续更新从 Latest 获取。
 
 ## 功能
 
@@ -17,15 +17,15 @@
 
 ## 宿主与平台
 
-依赖 DSH **0.2.0-rc.2** 的 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives。插件没有调用 Missher 专属扩展接口，也不需要额外兼容插件。
+需要 DSH 提供 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives。兼容维护以合理宿主范围和持续适配最新版为目标，按这些实际接口判断；rc.2 是历史测试基线，不是唯一可用版本。插件没有调用 Missher 专属扩展接口，也不需要额外兼容插件。
 
-现有安装/Loader/通信及受控浏览器证据来自 **macOS Intel、基于 rc.2 的 Missher SDK/桌面环境**。0.2.1 沿用已验收的 `0.2.1-local.9` 三份运行入口；本次只整理发布元数据和文档。**纯官方完整应用、Windows、Linux、Apple Silicon 和官方 alpha.1 未用本版本独立验收。** 不把桌面应用本身的跨平台测试算成本插件的测试。详细层级见 [VALIDATION.md](VALIDATION.md)。
+历史安装/Loader/通信及受控浏览器证据来自 macOS Intel 的 rc.2 环境。0.2.1 沿用已验收的 `0.2.1-local.9` 三份运行入口；Ubuntu 配套桌面 `0.2.1-alpha.2.20261014.1` 也已安装并激活，安装文件与公开包一致。其他平台、纯官方完整应用以及全部图表原生交互仍需单独验收，不把桌面测试当作插件测试。历史层级见 [VALIDATION.md](VALIDATION.md)。
 
-DSH peer 保留 `*`，不会仅凭版本号拒绝宿主；这不代表所有版本兼容。缺少上述接口时应保留正常加载错误，不使用版本豁免。
+DSH peer 保留 `*`，当前包的 Cordis / Schemastery 仍有历史精确 peer 声明；具体依赖见 `package.json`。宽松 DSH 声明不代表全部版本已验收，缺少必要接口时须显示实际加载错误。当前正式 Release 和安装信息见本页；旧归档与验证记录保留当时状态。
 
 ## 安装、启用与卸载
 
-1. 从 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 下载所选版本的 `missher-dsh-usage-statistics-<版本>.tgz`，使用同版 `SHA256SUMS` 核对文件。GitHub 自动生成的 Source code 压缩包不是插件安装包。
+1. 从 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) 下载所选版本的 `missher-dsh-usage-statistics-<版本>.tgz`，使用同版 `SHA256SUMS` 核对文件。GitHub 自动生成的 Source code 压缩包不是插件安装包。
 2. 桌面版进入 **插件 → 添加插件 → 包名或地址**，填写下载的 `.tgz` 绝对路径；也可以填写该文件的公开下载 URL。安装包包含全部运行入口，安装不需要构建或本机 SDK。
 3. 按宿主提示启用/重新加载，打开 **设置 → 使用统计**。有历史记录时会汇总已有用量；没有记录时显示空状态。
 4. 在插件管理页关闭本插件的启用开关可停用，重新打开可恢复。宿主未启用热加载时，按提示正常重启后生效。

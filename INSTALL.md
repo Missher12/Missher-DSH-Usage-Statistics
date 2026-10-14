@@ -2,7 +2,7 @@
 
 [中文完整说明](README.md) · [Full English instructions](README.en.md#install-and-use)
 
-本插件是可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。当前源码/上架包为 **0.2.1**，已发布资产以 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 为准。宿主与平台的实测范围见 [VALIDATION.md](VALIDATION.md)。
+本插件是可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。当前正式交付为 **0.2.1**，后续更新以 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) 为准。宿主能力要求与当前安装范围见 [README](README.md#宿主与平台)，历史实测记录见 [VALIDATION.md](VALIDATION.md)。
 
 ## 桌面版
 
