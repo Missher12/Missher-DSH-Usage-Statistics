@@ -1,3 +1,7 @@
+# 0.2.2：宿主能力检查与兼容验证
+
+当前版本支持按实际接口能力准入；开发依赖锁定不等于运行时只能使用某个版本。已验证的宿主、缺接口行为与未测范围见 [README.md](README.md)、[VALIDATION.md](VALIDATION.md) 和 [验证摘要](verification/usage-0.2.2.json)。保留只读原始会话、独立派生缓存、卸载清理及现有统计界面。历史记录中的精确版本限制或发布状态仅描述当时阶段；当前下载状态以 Releases 为准。
+
 # 2026-10-05：公开市场包装 0.2.1
 
 MARKET-20261005。本仓库是唯一维护入口；本轮起始 main/远端均为 `66ddafd3fe1405807055c32f3766fc92894dfbb6`，工作树干净。版本更新到 0.2.1，只调整包元数据、中英文说明和当前维护记录；src/lib 与已验收 local.9 保持字节一致。旧公开 v0.2.1-local.9 资产已匿名下载核对，SHA256 为 `a85e5fdda47aeb7922eb943822d54a022ef240a335935a48daf338251712b39e`，不覆盖旧资产。
@@ -10,7 +14,7 @@ MARKET-20261005。本仓库是唯一维护入口；本轮起始 main/远端均�
 
 用户追加要求去掉小时活动的框，并在鼠标悬停时显示 Token 消耗。候选更新为 **0.2.1-local.9**：只移除小时区域的边框、底色、圆角和内边距；沿用原生 Tooltip 的悬停/键盘/点击提示，小时数据与颗粒图不变。相对 .8 的运行代码改动只有 `UsageInsightsSection.module.css`。
 
-隔离构建目录为 `.verification/hourly-frameless-20261003/plugins/usage`；冻结包和本轮验证见 `/Users/missher/Documents/Deepseek-harness-Cordis/coordination/2026-10-03/usage-hourly-frameless/DELIVERY.md`。旧 .8 交付保持，维护目录 lib 和日常 profile 不由本会话写入，日常安装仍由协调会话统一安排。
+隔离构建目录为 `.verification/hourly-frameless-20261003/plugins/usage`；冻结包和本轮验证见 `<historical-workspace>/Deepseek-harness-Cordis/coordination/2026-10-03/usage-hourly-frameless/DELIVERY.md`。旧 .8 交付保持，维护目录 lib 和日常 profile 不由本会话写入，日常安装仍由协调会话统一安排。
 
 # 2026-10-03：小时活动与配色候选（前一轮 .8）
 
@@ -18,9 +22,9 @@ MARKET-20261005。本仓库是唯一维护入口；本轮起始 main/远端均�
 
 实现：原 53×7 颗粒图保留；配色选择移到标题旁原生菜单，五种预设、跟随主题和自定义，保留 localStorage 颜色键；下方新增今天 24 小时柱状图、准确数值提示、合计/峰值、时区和刷新。Host 从原有接受且去重的用量事件按日期/小时聚合；仅派生行版本 3→4、浏览器快照信封 1→2，缓存域仍为 1。不改原始会话、模型、凭据或其他插件。
 
-构建、测试和 profile 均在 `.verification/hourly-20261003/plugins/usage`；只读 SDK 为 `/Users/missher/Documents/Projects/03-DeepSeek-Harness/升级候选/cordis-0.2.0-rc.2-20260930`。不重建维护目录 lib。类型检查、77 项测试、实际 CLI tarball 安装/加载/快照/旧缓存重建/重启/卸载/重装及会话字节保护通过。受控浏览器通过正常 Host 启动 URL 登录（裸根 URL 会返回 401）；用 IAB 验证，Chrome 的自动翻译会扰动文案。
+构建、测试和 profile 均在 `.verification/hourly-20261003/plugins/usage`；只读 SDK 为 `<historical-workspace>/Projects/03-DeepSeek-Harness/升级候选/cordis-0.2.0-rc.2-20260930`。不重建维护目录 lib。类型检查、77 项测试、实际 CLI tarball 安装/加载/快照/旧缓存重建/重启/卸载/重装及会话字节保护通过。受控浏览器通过正常 Host 启动 URL 登录（裸根 URL 会返回 401）；用 IAB 验证，Chrome 的自动翻译会扰动文案。
 
-最终包、校验值、截图、验证与剩余限制统一见 `/Users/missher/Documents/Deepseek-harness-Cordis/coordination/2026-10-03/usage-hourly/DELIVERY.md`。日常安装由协调会话单写；本轮不安装、不重启、不提交或推送。
+最终包、校验值、截图、验证与剩余限制统一见 `<historical-workspace>/Deepseek-harness-Cordis/coordination/2026-10-03/usage-hourly/DELIVERY.md`。日常安装由协调会话单写；本轮不安装、不重启、不提交或推送。
 
 以下是旧阶段的记录，不作为当前版本和安装状态。
 
@@ -40,9 +44,9 @@ MARKET-20261005。本仓库是唯一维护入口；本轮起始 main/远端均�
 
 ## 2026-09-29：DSH 0.2.0-rc.1 适配
 
-需求 UPGRADE-20260929。唯一源码为 `/Users/missher/Documents/Projects/03-DeepSeek-Harness/源码仓库/Deepseek-harness-Cordis/plugins/dsh-usage-statistics`。统一仓库基线 HEAD `c7c457e5e07fa11a04bf8764d5f89585d789f258`；本插件开始时无本地修改。其他插件负责人的并行修改保留，不由本会话维护。旧 `Projects/04-Harness-Plugins/dsh-usage-statistics` 只作日常安装及历史入口，本轮不回写。
+需求 UPGRADE-20260929。唯一源码为 `<historical-workspace>/Projects/03-DeepSeek-Harness/源码仓库/Deepseek-harness-Cordis/plugins/dsh-usage-statistics`。统一仓库基线 HEAD `c7c457e5e07fa11a04bf8764d5f89585d789f258`；本插件开始时无本地修改。其他插件负责人的并行修改保留，不由本会话维护。旧 `Projects/04-Harness-Plugins/dsh-usage-statistics` 只作日常安装及历史入口，本轮不回写。
 
-只读 SDK：`/Users/missher/Documents/Projects/03-DeepSeek-Harness/升级候选/cordis-0.2.0-rc.1-20260929`，同一整合 SHA；上游基线 `dsh-v0.2.0-rc.1` / `4878cdabd87d4041bdaff61d04c966883b9fd07a`。开发、安装验证均使用此已构建 SDK；CLI 安装调用 SDK 固定的 pnpm 11.7.0。
+只读 SDK：`<historical-workspace>/Projects/03-DeepSeek-Harness/升级候选/cordis-0.2.0-rc.1-20260929`，同一整合 SHA；上游基线 `dsh-v0.2.0-rc.1` / `4878cdabd87d4041bdaff61d04c966883b9fd07a`。开发、安装验证均使用此已构建 SDK；CLI 安装调用 SDK 固定的 pnpm 11.7.0。
 
 候选 **0.2.1-local.1** 将 DSH peer/dev 依赖精确对齐 0.2.0-rc.1。原统计、持久化读取、Typert 与设置页实现继续适用，`src/` 没有改动；缓存域版本 1、行格式版本 3、浏览器键 `dsh.usage-statistics.snapshot.v1` 保持不变。维护目录的 `lib/` 保留旧字节，本轮只能交付隔离构建的安装包。未改变 Cordis/Schemastery/Zod 版本，未添加兼容豁免或新插件依赖。
 
@@ -50,13 +54,13 @@ MARKET-20261005。本仓库是唯一维护入口；本轮起始 main/远端均�
 
 CUA/IAB 打开隔离 Host 返回 `net::ERR_BLOCKED_BY_CLIENT`，本会话停止浏览器尝试并关闭临时 Host。当前候选的真实页面、浏览器 RPC 与日常原生应用未在本会话验收，由前台协调会话继续；不运行 shell/Playwright CLI/CDP 浏览器绕过限制。组件和通信描述测试不能代替真实页面。未调用真实模型、改日常 profile、安装或重启日常应用，也未执行 Git 暂存、提交、推送或发布。
 
-当前验证分层见 [VALIDATION.md](VALIDATION.md)；机器可读回执为 `verification/upgrade-020.json`。本轮独占协调回执：`/Users/missher/Documents/Deepseek-harness-Cordis/coordination/2026-09-29/upgrade-020/usage.md`。后面的 0.2.0 / 0.1.7-rc.2 记录均为历史事实，不作为当前候选的原生验收。
+当前验证分层见 [VALIDATION.md](VALIDATION.md)；机器可读回执为 `verification/upgrade-020.json`。本轮独占协调回执：`<historical-workspace>/Deepseek-harness-Cordis/coordination/2026-09-29/upgrade-020/usage.md`。后面的 0.2.0 / 0.1.7-rc.2 记录均为历史事实，不作为当前候选的原生验收。
 
 ## 2026-09-28 职责审查（历史）
 
 2026-09-28 协调审查：源码 HEAD `4058457826ca5c7f3a618ab82cff8a872bb74d1a`、版本 **0.2.0**，开始时工作树干净；本地 `origin/main` 也指向此 SHA，本轮未查询远端实时状态。职责为跨会话用量、活动、常用模型/推理强度与工具/技能排行；context-manager 本会话累计、REQ-02 模型能力设置和 REQ-03 详情展开不归本插件。具体口径见 README.md。
 
-本轮在 `/private/tmp/dsh-usage-audit-20260928-j1i_ytlg/plugin` 隔离副本运行 aggregate / fold / service / snapshot-cache 四个已有测试文件，**40/40 通过**。仍通过宿主持久化服务读取，只写本插件派生缓存。仅纠正文档；未改 src/lib/manifest、未构建打包或安装、未触碰生产 profile、未重启应用、未执行 Git 暂存或发布操作。现有 lib 与 0.2.0 安装包、历史原生验收记录的入口哈希一致；这只是字节核对，不是本轮原生验收。独占回执见 `/Users/missher/Documents/Deepseek-harness-Cordis/coordination/2026-09-28/ui-usage.md`。
+本轮在 `/private/tmp/dsh-usage-audit-20260928-j1i_ytlg/plugin` 隔离副本运行 aggregate / fold / service / snapshot-cache 四个已有测试文件，**40/40 通过**。仍通过宿主持久化服务读取，只写本插件派生缓存。仅纠正文档；未改 src/lib/manifest、未构建打包或安装、未触碰生产 profile、未重启应用、未执行 Git 暂存或发布操作。现有 lib 与 0.2.0 安装包、历史原生验收记录的入口哈希一致；这只是字节核对，不是本轮原生验收。独占回执见 `<historical-workspace>/Deepseek-harness-Cordis/coordination/2026-09-28/ui-usage.md`。
 
 ## 2026-09-26 兼容性修复与验收（历史）
 

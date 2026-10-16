@@ -1,10 +1,47 @@
 # DeepSeek Harness 使用统计
 
-[English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
+[English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
 
-独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前正式交付版本为 **0.2.1**；后续更新从 Latest 获取。
+独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前版本为 **0.2.2**：已在三个真实宿主上完成安装、Loader 与安装生命周期验收（真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成）。成品与校验值请从 Releases 获取。
+
+## 兼容范围（0.2.2）
+
+peer 声明：
+
+- `@deepseek-ai/dsh*` 保持 `*`：版本门由宿主自己的 `evaluatePluginCompatibility` 判断，不依赖插件自带白名单，也不使用 `plugin allow-version` 或任何旁路兼容包。
+- `@deepseek-ai/cordis`：`^4.0.4 || ^4.0.5-alpha.1`。
+- `@deepseek-ai/schemastery`：`^3.18.4 || ^3.18.5-alpha.1`。
+- 开发 SDK 仍锁定 `0.2.0-rc.2`（`pnpm-lock.yaml` 与 `pnpm-workspace.yaml` 的 `link:` 覆盖），保证开发环境可复现；这不限制插件在更宽宿主上运行。
+
+三个宿主上实际跑过的库版本（同一份 tgz）：
+
+| 宿主 | 运行版本 | Cordis | Schemastery |
+| --- | --- | --- | --- |
+| Missher 配套 rc.2 | 0.2.0-rc.2 | 4.0.4 | 3.18.4 |
+| Missher 配套 alpha.2 | 0.2.1-alpha.2 | 4.0.5-alpha.1 | 3.18.5-alpha.1 |
+| 纯官方 npm runtime | 0.2.1-alpha.5 | 4.0.5 | 3.18.5 |
+
+`4.0.5` 与 `3.18.5` 落在已声明范围内，且已在官方 runtime 上真实运行；范围仍不表示其他版本都已实测。
+
+缺接口时的行为按三种情况分开：
+
+- **整个必需服务缺失**（例如组合里没有 `sessionPersistence`）：插件的必需注入让它保持等待，**由宿主的 Loader 审计报出** `pending (waiting for service: sessionPersistence)`，`usageStatistics` 服务不存在，不会出现“0 用量”的假统计。
+- **服务存在但缺少成员**（例如 `storageDomain.open` 不存在、`sessionPersistence` 少了 `stat`）：插件在初始化时报出确切缺失成员，服务保持不可用。
+- **只有可选能力缺失**（实时会话索引 `sessions` 不存在）：用量统计照常完整，缓存与数据口径不变。
+
+## 截图
+
+![浅色主界面：累计用量、53×7 颗粒图与设置区块](docs/images/usage-0.2.2-light.png)
+
+**浅色主界面** — 包版本 0.2.2；合成数据（152 条合成会话，累计 17 850 900 Token）；截取自纯官方 npm runtime 0.2.1-alpha.5 的真实 Web 设置页（Linux x64，1280×720）。无个人会话、笔记、本机路径或凭据。
+
+![深色主题：小时活动柱状图与悬停用量提示](docs/images/usage-0.2.2-hourly-dark.png)
+
+**深色主题与小时活动** — 同一版本与同一组合成数据；今天 0–23 点共计 236 100 Token，图示悬停/聚焦在某小时上。Tooltip 本次通过点击与键盘焦点实际显示；鼠标移入显示沿用此前未修改的 local.9 证据。截图方法：JPEG 原始帧，仅做无损格式转为 PNG，像素未修改，非生成图、非拼图。
+
+图片文件与说明见 [docs/images](docs/images/README.md)。
 
 ## 功能
 
@@ -17,15 +54,17 @@
 
 ## 宿主与平台
 
-需要 DSH 提供 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives。兼容维护以合理宿主范围和持续适配最新版为目标，按这些实际接口判断；rc.2 是历史测试基线，不是唯一可用版本。插件没有调用 Missher 专属扩展接口，也不需要额外兼容插件。
+运行时依赖宿主的 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives；插件不调用 Missher 专属扩展接口，也不需要额外兼容插件。
 
-历史安装/Loader/通信及受控浏览器证据来自 macOS Intel 的 rc.2 环境。0.2.1 沿用已验收的 `0.2.1-local.9` 三份运行入口；Ubuntu 配套桌面 `0.2.1-alpha.2.20261014.1` 也已安装并激活，安装文件与公开包一致。其他平台、纯官方完整应用以及全部图表原生交互仍需单独验收，不把桌面测试当作插件测试。历史层级见 [VALIDATION.md](VALIDATION.md)。
+**0.2.2 已实测**：同一份 tgz 在 Missher 配套 rc.2、Missher 配套 alpha.2 与纯官方 npm runtime 0.2.1-alpha.5 上分别进程隔离安装、启动、读取快照、从 v3 派生缓存重建 v4、重启、卸载并重装；原始会话字节与缓存字节保持一致，缓存域 1 / 行 4 不变，安装使用 pnpm 11.7.0，profile 独立且空凭据，未提交模型请求。真实 Web 设置页验收在纯官方 0.2.1-alpha.5（Linux x64）完成。
 
-DSH peer 保留 `*`，当前包的 Cordis / Schemastery 仍有历史精确 peer 声明；具体依赖见 `package.json`。宽松 DSH 声明不代表全部版本已验收，缺少必要接口时须显示实际加载错误。当前正式 Release 和安装信息见本页；旧归档与验证记录保留当时状态。
+**本轮未验证**：原生日常 Electron 界面、macOS、Windows、Apple Silicon、其他宿主版本。桌面应用自身的跨平台测试不计入本插件测试。分层结果见 [VALIDATION.md](VALIDATION.md)。
+
+DSH peer 保留 `*`，不会仅凭版本号拒绝宿主；这不代表所有版本兼容。缺必需服务由宿主 Loader 提示等待，缺成员由插件报错，均不使用版本豁免。
 
 ## 安装、启用与卸载
 
-1. 从 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/latest) 下载所选版本的 `missher-dsh-usage-statistics-<版本>.tgz`，使用同版 `SHA256SUMS` 核对文件。GitHub 自动生成的 Source code 压缩包不是插件安装包。
+1. 从 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 下载所选版本的 `missher-dsh-usage-statistics-<版本>.tgz`，使用同版 `SHA256SUMS` 核对文件。GitHub 自动生成的 Source code 压缩包不是插件安装包。
 2. 桌面版进入 **插件 → 添加插件 → 包名或地址**，填写下载的 `.tgz` 绝对路径；也可以填写该文件的公开下载 URL。安装包包含全部运行入口，安装不需要构建或本机 SDK。
 3. 按宿主提示启用/重新加载，打开 **设置 → 使用统计**。有历史记录时会汇总已有用量；没有记录时显示空状态。
 4. 在插件管理页关闭本插件的启用开关可停用，重新打开可恢复。宿主未启用热加载时，按提示正常重启后生效。
@@ -59,7 +98,9 @@ pnpm build
 pnpm pack:bundle
 ```
 
-SDK 链接 `harness-sdk`、开发依赖和本机路径均不进入成品包。验证正在使用的源码时应在独立副本中运行，避免重建日常链接的 `lib`。隔离安装验证入口为 `DSH_SOURCE_DIR=/absolute/path/to/built-harness node scripts/verify-profile.mjs`；脚本只创建自己的测试 profile。
+SDK 链接 `harness-sdk`、开发依赖和本机路径均不进入成品包。验证正在使用的源码时应在独立副本中运行，避免重建日常链接的 `lib`。
+
+`scripts/verify-profile.mjs` 是**仅固定开发 SDK**的历史隔离安装入口：它要求验收运行时与开发 SDK 同版本（`DSH_SOURCE_DIR=/absolute/path/to/built-harness`），只创建自己的测试 profile。0.2.2 的宽版本（rc.2 / alpha.2 / 官方 alpha.5）三宿主独立验收在审查者的私有证据目录内运行，不随本仓库公开发布，因此这里不提供对应的公开命令。
 
 ## 来源与反馈
 

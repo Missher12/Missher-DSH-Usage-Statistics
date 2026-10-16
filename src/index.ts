@@ -5,9 +5,10 @@ import zc from '@deepseek-ai/schemastery'
 import { z } from 'zod'
 import type { Session, SessionId } from '@deepseek-ai/dsh-session'
 import type {} from '@deepseek-ai/dsh-session-persistence'
-import type { SessionPersistenceSnapshot } from '@deepseek-ai/dsh-session-persistence'
-import type { KvTable } from '@deepseek-ai/dsh-storage-domain'
+import type { SessionPersistence, SessionPersistenceSnapshot } from '@deepseek-ai/dsh-session-persistence'
+import type { DomainFacility, KvTable } from '@deepseek-ai/dsh-storage-domain'
 import { TypertRemoteService, Remote } from '@deepseek-ai/dsh-typert-protocol'
+import { requireHostCapability, SESSION_PERSISTENCE_CAPABILITY, STORAGE_DOMAIN_CAPABILITY, type CapabilityContext } from './capabilities.ts'
 import { aggregateUsageRows } from './aggregate.ts'
 import { foldSessionUsage } from './fold.ts'
 import { usageInsightsDomainSpec } from './spec.ts'
@@ -111,6 +112,8 @@ export class UsageStatistics extends TypertRemoteService {
   private readonly eventGeneration = new Map<string, number>()
   private readonly liveRows = new Map<string, LiveCacheRecord>()
   private readonly refreshTimeoutMs: number
+  /** Admitted Host interface, resolved once per service lifetime. */
+  private sessionPersistence!: SessionPersistence
 
   constructor(ctx: Context, public config: Config = {}) {
     super(ctx, 'usageStatistics')
@@ -140,7 +143,11 @@ export class UsageStatistics extends TypertRemoteService {
 
   /** Open the cache domain for the lifetime of this service. */
   protected async [Service.init](): Promise<void> {
-    const domain = await this.ctx.storageDomain.open(usageInsightsDomainSpec)
+    // Judge the Host by the interfaces this plugin calls, never by its version.
+    const capabilities = this.ctx as unknown as CapabilityContext
+    const storageDomain = requireHostCapability<DomainFacility>(capabilities, STORAGE_DOMAIN_CAPABILITY)
+    this.sessionPersistence = requireHostCapability<SessionPersistence>(capabilities, SESSION_PERSISTENCE_CAPABILITY)
+    const domain = await storageDomain.open(usageInsightsDomainSpec)
     this.ctx.effect(() => async () => {
       this.lifetime.abort()
       await this.refreshInFlight?.catch(() => {})
@@ -182,7 +189,7 @@ export class UsageStatistics extends TypertRemoteService {
     const timeZone = this.config.timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone
     // Validate now so a bad override fails before any cache write.
     void new Intl.DateTimeFormat('en', { timeZone }).format()
-    const snapshots = await this.ctx.sessionPersistence.list({ signal })
+    const snapshots = await this.sessionPersistence.list({ signal })
     const table = this.requireTable()
     const listedIds = new Set(snapshots.map(snapshot => String(snapshot.header.id)))
     for (const id of this.liveRows.keys()) {
@@ -231,13 +238,13 @@ export class UsageStatistics extends TypertRemoteService {
       return { row: cached.data.row }
     }
     try {
-      const handle = await this.ctx.sessionPersistence.open(snapshot.header.id, 'read', { signal })
+      const handle = await this.sessionPersistence.open(snapshot.header.id, 'read', { signal })
       let row: SessionUsageRow
       let revision: string
       try {
         // Opening an old log may publish its current generation. Capture that
         // revision before reading; a later append can only invalidate this cache.
-        const current = await this.ctx.sessionPersistence.stat(snapshot.header.id, { signal })
+        const current = await this.sessionPersistence.stat(snapshot.header.id, { signal })
         revision = String(current?.revision ?? snapshot.revision)
         row = foldSessionUsage(handle.header, (await handle.read(0, undefined, { signal })).events, timeZone, handle.inheritedEventCount)
       } finally {

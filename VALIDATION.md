@@ -1,3 +1,33 @@
+# 0.2.2：宽版本兼容与真实宿主验收（2026-10-17）
+
+本版本相对 0.2.1 不只是元数据与文档：新增了必需的宿主接口成员检查（`src/capabilities.ts`，并由 `src/index.ts` 在 `Service.init` 使用），并更新了兼容 peer 范围与相关测试。这些改动**已经过验证**：当前处于验证后的收尾阶段，业务源码与三入口 `lib/` 冻结，只整理公开文档与本轮脚手架边界。三个真实宿主已完成安装、Loader 与安装生命周期验收；真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成。本页记录验证事实；可下载资产与发布日期以 Releases 为准。
+
+## 分层矩阵 / Layer matrix
+
+| 层级 / Layer | 结果 / Result | 证据边界 / Boundary |
+| --- | --- | --- |
+| 类型检查 / Typecheck | 通过 | 只覆盖 `src/`（`tsconfig.json` 的 `include` 仅 `src`）：`tsc --noEmit` 验证运行源码；`tests/` 不在类型检查范围内，由 Vitest 实际运行验证 |
+| 定向 Host 测试 / Focused host tests | 通过：`capabilities`、`compatibility`、`service`、`loader-composition` 共 **36 项全通过**（首次 35 通过 + 1 项 Loader 断言写错，修正后 loader 3 项全通过） | 1 worker；修正后未再跑整套 77 项 |
+| 既有 77 项基线 / Existing 77 baseline | 复用此前在锁定 rc.2 开发 SDK 上通过的结果，**不声称本轮重新全跑** | 业务统计口径与 `src/client` 本轮未改 |
+| 构建与打包 / Build + pack | 候选 0.2.2 已构建、打包并冻结运行件 | 精确 tgz SHA-256 在文档冻结后重新 pack 时绑定，本文不写临时值 |
+| Missher 配套 rc.2 | 通过 | 0.2.0-rc.2，Cordis 4.0.4 / Schemastery 3.18.4 |
+| Missher 配套 alpha.2 | 通过 | 0.2.1-alpha.2，Cordis 4.0.5-alpha.1 / Schemastery 3.18.5-alpha.1 |
+| 纯官方 npm runtime | 通过 | 0.2.1-alpha.5，Cordis 4.0.5 / Schemastery 3.18.5 |
+| 三宿主安装生命周期 / Install lifecycle | 通过：真实 CLI 安装、Loader 快照、从 v3 派生缓存重建 v4、重启、卸载重装；原始会话字节与缓存字节保留；缓存域 1 / 行 4 不变；pnpm 11.7.0；独立 profile、空凭据、未提交模型请求 | 每个 runtime 独立进程，互不共享 Cordis |
+| 缺接口行为 / Missing interfaces | 通过：正常组合（无可选 `sessions`）仍给出完整统计（30 000 Token / 76% 缓存命中）；缺 `sessionPersistence` 与缺 `storageDomain` 各自由宿主 Loader 报出准确 waiting service 诊断 | 共 9 个场景通过 |
+| 真实 Web 设置页 / Real Web settings UI | 通过（纯官方 alpha.5，Linux x64）：152 条合成会话、累计 17 850 900 Token、今天 236 100（UTC）；24 个小时桶与种子全等（18 点 92 400、19 点 0）；无 border/bg/radius/padding，桌面小时区 559px = scrollWidth 559；浅/深主题；640px 窗口 351 = scrollWidth、24 柱；每日/每周/累计各 371 格、53 列 × 每列 7 格；零值淡色；OKLCH .89/.78/.67/.56/.45 随用量加深；青绿 #369f97 切换并 reload 后保留；手动刷新 | Tooltip 本次以点击与键盘焦点实际显示；鼠标移入沿用此前未修改的 local.9 证据 |
+| 截图 / Screenshots | 已存 `docs/images/usage-0.2.2-light.png`、`docs/images/usage-0.2.2-hourly-dark.png` | 合成数据、0.2.2、官方 alpha.5 Web/IAB、Linux x64、1280×720；JPEG 原始帧仅无损转为 PNG，像素未修改 |
+| 平台 / Platform | 仅 Linux x64 | 原生日常 Electron、macOS、Windows、Apple Silicon 本轮**未验证**；桌面应用自身测试不计入本插件 |
+| 下载 / Download | 见 Releases | 可安装归档与 SHA256SUMS 按版本发布；不覆盖历史资产 |
+
+## 范围依据 / Range rationale
+
+- `@deepseek-ai/dsh*` 保持 `*`：版本门在宿主 `evaluatePluginCompatibility`（只评估这些 peer），不使用 `plugin allow-version` 或第三方 shim。
+- `@deepseek-ai/cordis` `^4.0.4 || ^4.0.5-alpha.1`、`@deepseek-ai/schemastery` `^3.18.4 || ^3.18.5-alpha.1`：适配 semver 语义（prerelease 不会被裸 caret 接受），并覆盖三个宿主实际运行的 4.0.4 / 4.0.5-alpha.1 / 4.0.5 与 3.18.4 / 3.18.5-alpha.1 / 3.18.5。其他落在范围内但未运行的版本（如 4.0.5-alpha.5、4.0.6、4.1.0、3.19.0）**不声称已实测**。
+- 开发 SDK 仍锁定 `0.2.0-rc.2`（`pnpm-lock.yaml` / `pnpm-workspace.yaml` 的 `link:` 覆盖）以保证可复现；该锁定不限制插件运行范围。
+
+机器可读摘要见 [verification/usage-0.2.2.json](verification/usage-0.2.2.json)。本轮新增的宽版本验收脚手架不随仓库公开发布；`scripts/verify-profile.mjs` 仍是**仅固定开发 SDK** 的历史入口。
+
 # 0.2.1：上架包装 / Marketplace packaging（2026-10-05）
 
 0.2.1 只更新包元数据与中英文说明；全部 src/lib 与 local.9 一致，没有增加缓存迁移或改变宽松 DSH peer 准入。三份运行入口逐字节对照 2026-10-03 最终验收包与公开 v0.2.1-local.9 资产。公开旧 tgz 的 SHA256 为 `a85e5fdda47aeb7922eb943822d54a022ef240a335935a48daf338251712b39e`；发布说明变化导致它与早期验收 tgz 的整体哈希不同，不代表运行代码改变。

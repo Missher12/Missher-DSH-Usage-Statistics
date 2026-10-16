@@ -1,0 +1,164 @@
+{
+  "version": "0.2.2",
+  "kind": "verification-record",
+  "recordedAt": "2026-10-17",
+  "scope": "Wide-version compatibility and real-host acceptance for 0.2.2. Documentation and images were finalized after runtime validation; every runtime entry and runtime manifest field matches the tested tarball byte-for-byte.",
+  "compatibility": {
+    "dshPeers": "*",
+    "dshPeersRationale": "The runtime gate is the Host's own evaluatePluginCompatibility, which evaluates only @deepseek-ai/dsh and @deepseek-ai/dsh-* peers. No plugin-side allowlist, no version exemption, no shim package.",
+    "cordis": "^4.0.4 || ^4.0.5-alpha.1",
+    "schemastery": "^3.18.4 || ^3.18.5-alpha.1",
+    "rangeRationale": "A bare caret range does not admit a prerelease, so the ranges name both tested lines explicitly. Versions inside the range but never executed are explicitly not claimed as tested.",
+    "developmentSdkLock": "0.2.0-rc.2"
+  },
+  "runtimes": [
+    {
+      "id": "missher-community-rc2",
+      "runtimeVersion": "0.2.0-rc.2",
+      "cordis": "4.0.4",
+      "schemastery": "3.18.4",
+      "kind": "Missher community build with extensions, not a plain official release"
+    },
+    {
+      "id": "missher-community-alpha2",
+      "runtimeVersion": "0.2.1-alpha.2",
+      "cordis": "4.0.5-alpha.1",
+      "schemastery": "3.18.5-alpha.1",
+      "kind": "Missher community build with extensions, not a plain official release"
+    },
+    {
+      "id": "official-alpha5",
+      "runtimeVersion": "0.2.1-alpha.5",
+      "cordis": "4.0.5",
+      "schemastery": "3.18.5",
+      "kind": "Plain official npm runtime"
+    }
+  ],
+  "checks": {
+    "typecheck": "passed for src only: tsconfig.json includes src alone, so tsc --noEmit validates the runtime sources; tests are not type-checked and are validated by running them under Vitest",
+    "focusedHostTests": {
+      "files": [
+        "tests/host/capabilities.spec.ts",
+        "tests/host/compatibility.spec.ts",
+        "tests/host/service.spec.ts",
+        "tests/host/loader-composition.spec.ts"
+      ],
+      "total": 36,
+      "passed": 36,
+      "note": "First run had 35 passed and one wrongly written Loader assertion; after the fix the three loader-composition cases pass and the combined set is 36/36."
+    },
+    "existingBaseline": {
+      "total": 77,
+      "status": "reused from the earlier run against the locked rc.2 development SDK",
+      "note": "Not re-run in this round and not claimed as re-run; the aggregation semantics and the client entry were not modified."
+    },
+    "installLifecycle": {
+      "status": "passed on all three runtimes, one separate process each",
+      "details": [
+        "real CLI install of the same candidate tarball",
+        "Loader boot and service snapshot",
+        "derived cache rebuilt from a v3 row into v4",
+        "restart",
+        "uninstall and reinstall",
+        "original session bytes and cache bytes preserved",
+        "cache domain 1 and row format 4 unchanged",
+        "pnpm 11.7.0",
+        "isolated profile with empty credentials",
+        "no model request submitted"
+      ]
+    },
+    "missingInterfaceBehaviour": {
+      "status": "passed, 9 scenarios across the three runtimes",
+      "normalComposition": "No optional live-session index present; statistics remain complete at 30000 Tokens with a 0.76 cache hit rate.",
+      "missingRequiredService": "The Host Loader audit reports the pending entry with the exact waiting service; the statistics service stays absent instead of reporting zero usage.",
+      "missingMember": "A service that exists but lacks a member makes the plugin report the exact missing member during initialization; the service stays unavailable.",
+      "optionalCapability": "Only a missing optional capability is tolerated; the core statistics are never reduced.",
+      "missingMemberEvidence": "focused capabilities unit tests against the locked development SDK; not one of the nine real-host composition cases"
+    },
+    "realWebUi": {
+      "status": "passed on the plain official 0.2.1-alpha.5 runtime only",
+      "platform": "Linux x64, 1280x720",
+      "data": {
+        "kind": "synthetic",
+        "sessions": 152,
+        "totalTokens": 17850900,
+        "todayTokensUtc": 236100,
+        "exampleHours": {
+          "18": 92400,
+          "19": 0
+        },
+        "hourlyBucketsMatchSeed": true
+      },
+      "layout": [
+        "24 hourly buckets equal to the fixture",
+        "hourly chart without border, background, radius or padding",
+        "desktop hourly area 559px with scrollWidth 559",
+        "640px window: 351px with scrollWidth 351 and 24 bars",
+        "daily, weekly and cumulative views each render 371 cells in 53 columns of 7",
+        "zero-usage cells pale, with OKLCH .89/.78/.67/.56/.45 darkening by usage",
+        "theme switch and reload keep the teal #369f97 preference",
+        "manual refresh works"
+      ],
+      "tooltip": "Displayed in this round through a real click and keyboard focus; pointer-enter behaviour relies on the earlier unchanged local.9 evidence."
+    },
+    "screenshots": {
+      "status": "captured by the reviewer and saved in the working tree; Git delivery is pending",
+      "files": [
+        "docs/images/usage-0.2.2-light.png",
+        "docs/images/usage-0.2.2-hourly-dark.png"
+      ],
+      "method": "raw JPEG frames of the real page, lossless format conversion to PNG only, pixels unmodified, no generated or composited imagery",
+      "privacy": "synthetic data only; no personal sessions, notes, machine paths, ports, tokens or credentials",
+      "sha256": {
+        "docs/images/usage-0.2.2-hourly-dark.png": "b9be22ca7de613cc42582c0ef306fe4af660e5b5ce58a75cb73e3476baea0556",
+        "docs/images/usage-0.2.2-light.png": "5f5fc95167cf8cc6cc3d27afddbd39c4c6e323d5ca8b3c1a40da29b726f66e8d"
+      }
+    }
+  },
+  "notVerified": [
+    "the native daily Electron surface",
+    "macOS, Windows and Apple Silicon",
+    "any host version other than the three recorded runtimes",
+    "official Release, marketplace listing and daily installation"
+  ],
+  "evidenceBoundaries": [
+    "No exit code, installation or Release result is asserted here that was not actually observed.",
+    "The public repository ships the frozen sources, the three runtime entry points and the existing development scripts only; the wide-version acceptance scaffolding of this round is archived outside the published surface.",
+    "Network observation in the acceptance runs covers the JavaScript-visible entry points of the Host child and is a partial observation, not a sandbox. No model-request count is asserted."
+  ],
+  "artifact": {
+    "name": "missher-dsh-usage-statistics-0.2.2.tgz",
+    "sha256": "45615ca6abf6e7f5dd4a45ad1c1b6442330eaa0ad4695855ba881d18e8b2c355",
+    "size": 547755,
+    "sha256Status": "final publication archive with neutral release wording; runtime and metadata byte parity independently verified",
+    "testedArchiveSha256": "316e3c6af63966793a155df96c2699ff07431b4d86678de0a0f1faf5db2a7070",
+    "runtimeByteParity": true,
+    "runtimeManifestParity": true,
+    "runtimeFiles": {
+      "lib/index.js": "3150f8ee8f229e31919abce01d04d53d49044c24976da01b671d8482254b7455",
+      "lib/client.js": "2467183e34fb7b29fd433cc053dac5086e228049faf162fb879228b3d73079ef",
+      "lib/typert.js": "eeedcd48346763042ff1d9e43a957e3eb0c92be4d20a5573f5fa86a86d4dd716",
+      "cordis.patch.yml": "42deed6b4e8bce62ed087975daf9713203d242ba26bfb0760291cb0655ae4283"
+    },
+    "changedAfterAcceptance": [
+      "INSTALL.md",
+      "README.en.md",
+      "README.md",
+      "VALIDATION.md",
+      "package.json",
+      "docs/images/README.md",
+      "docs/images/usage-0.2.2-hourly-dark.png",
+      "docs/images/usage-0.2.2-light.png"
+    ],
+    "lifecycleRerunAfterDocs": false,
+    "prePublicationArchiveSha256": "cf4f8fb16c08d0fb90f31183f6eff7e806d2df5ab484909f73153e876f7d8b7d",
+    "publicationDocChanges": [
+      "INSTALL.md",
+      "README.en.md",
+      "README.md",
+      "VALIDATION.md"
+    ]
+  },
+  "releaseStatusAtVerification": "not yet published",
+  "publishedVersionAtVerification": "0.2.1"
+}
