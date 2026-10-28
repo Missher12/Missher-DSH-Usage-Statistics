@@ -1,6 +1,6 @@
-# 0.2.2：宽版本兼容与真实宿主验收（2026-10-17）
+# 0.2.2：宽版本兼容与真实宿主验收（2026-10-17，候选，未发布）
 
-本版本相对 0.2.1 不只是元数据与文档：新增了必需的宿主接口成员检查（`src/capabilities.ts`，并由 `src/index.ts` 在 `Service.init` 使用），并更新了兼容 peer 范围与相关测试。这些改动**已经过验证**：当前处于验证后的收尾阶段，业务源码与三入口 `lib/` 冻结，只整理公开文档与本轮脚手架边界。三个真实宿主已完成安装、Loader 与安装生命周期验收；真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成。本页记录验证事实；可下载资产与发布日期以 Releases 为准。
+本版本相对 0.2.1 不只是元数据与文档：新增了必需的宿主接口成员检查（`src/capabilities.ts`，并由 `src/index.ts` 在 `Service.init` 使用），并更新了兼容 peer 范围与相关测试。这些改动**已经过验证**：当前处于验证后的收尾阶段，业务源码与三入口 `lib/` 冻结，只整理公开文档与本轮脚手架边界。三个真实宿主已完成安装、Loader 与安装生命周期验收；真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成。**0.2.2 不是已发布版本**：公开可下载版本仍是 0.2.1，Release、市场与 Git 交付由根/桌面负责人执行。
 
 ## 分层矩阵 / Layer matrix
 
@@ -18,7 +18,7 @@
 | 真实 Web 设置页 / Real Web settings UI | 通过（纯官方 alpha.5，Linux x64）：152 条合成会话、累计 17 850 900 Token、今天 236 100（UTC）；24 个小时桶与种子全等（18 点 92 400、19 点 0）；无 border/bg/radius/padding，桌面小时区 559px = scrollWidth 559；浅/深主题；640px 窗口 351 = scrollWidth、24 柱；每日/每周/累计各 371 格、53 列 × 每列 7 格；零值淡色；OKLCH .89/.78/.67/.56/.45 随用量加深；青绿 #369f97 切换并 reload 后保留；手动刷新 | Tooltip 本次以点击与键盘焦点实际显示；鼠标移入沿用此前未修改的 local.9 证据 |
 | 截图 / Screenshots | 已存 `docs/images/usage-0.2.2-light.png`、`docs/images/usage-0.2.2-hourly-dark.png` | 合成数据、0.2.2、官方 alpha.5 Web/IAB、Linux x64、1280×720；JPEG 原始帧仅无损转为 PNG，像素未修改 |
 | 平台 / Platform | 仅 Linux x64 | 原生日常 Electron、macOS、Windows、Apple Silicon 本轮**未验证**；桌面应用自身测试不计入本插件 |
-| 下载 / Download | 见 Releases | 可安装归档与 SHA256SUMS 按版本发布；不覆盖历史资产 |
+| 发布 / Release | 未发布 | 日常安装与正式 Release 由根/桌面单写；已发布仍是 0.2.1 |
 
 ## 范围依据 / Range rationale
 

@@ -1,46 +1,21 @@
 {
-  "version": "0.2.2",
-  "sourceRepository": "Missher12/Missher-DSH-Usage-Statistics",
-  "sourceTag": "v0.2.2",
-  "acceptedPackageSha256": "45615ca6abf6e7f5dd4a45ad1c1b6442330eaa0ad4695855ba881d18e8b2c355",
-  "validation": "verification/usage-0.2.2.json",
+  "version": "0.2.1-local.9",
+  "sourceRepository": "Missher12/Missher-DSH-Inter",
+  "sourceCommit": "383913fe07cac9a5de38fc26e2fb003ef42d977d",
+  "sourceAdditionalFix": null,
+  "acceptedPackageSha256": "607c4991c1dd2b012a4e364eea8872d3c077dc61c2728653381581becb883893",
   "runtimeFiles": [
     {
-      "path": "lib/index.js",
-      "sha256": "3150f8ee8f229e31919abce01d04d53d49044c24976da01b671d8482254b7455"
+      "path": "lib/client.js",
+      "sha256": "25893b241a6b71678b15f4198a14ca207da77efd28fe75906ba8706b3d3596d9"
     },
     {
-      "path": "lib/client.js",
-      "sha256": "2467183e34fb7b29fd433cc053dac5086e228049faf162fb879228b3d73079ef"
+      "path": "lib/index.js",
+      "sha256": "59afaec927018dd0e96055856628a79373dcd57ba0f3e2504a523b598f52c2a0"
     },
     {
       "path": "lib/typert.js",
       "sha256": "eeedcd48346763042ff1d9e43a957e3eb0c92be4d20a5573f5fa86a86d4dd716"
-    },
-    {
-      "path": "cordis.patch.yml",
-      "sha256": "42deed6b4e8bce62ed087975daf9713203d242ba26bfb0760291cb0655ae4283"
     }
-  ],
-  "previousDelivery": {
-    "version": "0.2.1-local.9",
-    "sourceRepository": "Missher12/Missher-DSH-Inter",
-    "sourceCommit": "383913fe07cac9a5de38fc26e2fb003ef42d977d",
-    "sourceAdditionalFix": null,
-    "acceptedPackageSha256": "607c4991c1dd2b012a4e364eea8872d3c077dc61c2728653381581becb883893",
-    "runtimeFiles": [
-      {
-        "path": "lib/client.js",
-        "sha256": "25893b241a6b71678b15f4198a14ca207da77efd28fe75906ba8706b3d3596d9"
-      },
-      {
-        "path": "lib/index.js",
-        "sha256": "59afaec927018dd0e96055856628a79373dcd57ba0f3e2504a523b598f52c2a0"
-      },
-      {
-        "path": "lib/typert.js",
-        "sha256": "eeedcd48346763042ff1d9e43a957e3eb0c92be4d20a5573f5fa86a86d4dd716"
-      }
-    ]
-  }
+  ]
 }

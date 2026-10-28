@@ -2,9 +2,9 @@
 
 [中文完整说明](README.md) · [Full English instructions](README.en.md#install-and-use)
 
-本插件是可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。当前版本为 **0.2.2**，安装包与校验值以 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 为准。宿主与平台的实测范围见 [VALIDATION.md](VALIDATION.md)。
+本插件是可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。当前源码候选为 **0.2.2**（尚未发布）；已发布资产仍是 **0.2.1**，以 [Releases](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) 为准。宿主与平台的实测范围见 [VALIDATION.md](VALIDATION.md)。
 
-0.2.2 已在三个真实宿主上验证同一份 tgz 的安装、启动、快照、派生缓存重建、重启与卸载重装：Missher 配套 rc.2（Cordis 4.0.4 / Schemastery 3.18.4）、Missher 配套 alpha.2（4.0.5-alpha.1 / 3.18.5-alpha.1）与纯官方 npm runtime 0.2.1-alpha.5（4.0.5 / 3.18.5）。缺整个必需服务时由宿主 Loader 报出等待（`pending (waiting for service: …)`）；服务存在但缺成员时由插件报出确切缺失成员；只有可选的实时会话索引缺失时统计仍完整。原生日常 Electron、macOS、Windows 与 Apple Silicon 本轮未验证。
+0.2.2 候选已在三个真实宿主上验证同一份 tgz 的安装、启动、快照、派生缓存重建、重启与卸载重装：Missher 配套 rc.2（Cordis 4.0.4 / Schemastery 3.18.4）、Missher 配套 alpha.2（4.0.5-alpha.1 / 3.18.5-alpha.1）与纯官方 npm runtime 0.2.1-alpha.5（4.0.5 / 3.18.5）。缺整个必需服务时由宿主 Loader 报出等待（`pending (waiting for service: …)`）；服务存在但缺成员时由插件报出确切缺失成员；只有可选的实时会话索引缺失时统计仍完整。原生日常 Electron、macOS、Windows 与 Apple Silicon 本轮未验证。
 
 ## 桌面版
 

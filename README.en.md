@@ -4,9 +4,9 @@
 
 Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.
 
-An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. The current version is **0.2.2**: installation, Loader and install-lifecycle acceptance ran on three real hosts, while the real Web interface was reviewed only on the plain official 0.2.1-alpha.5 runtime. See Releases for the installable archive and checksums.
+An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. The current source candidate is **0.2.2**: installation, Loader and install-lifecycle acceptance ran on three real hosts, while the real Web interface was reviewed only on the plain official 0.2.1-alpha.5 runtime. It is **not released**; the published downloadable version is still **0.2.1** — see Releases.
 
-## Compatibility range (0.2.2)
+## Compatibility range (0.2.2 candidate)
 
 Declared peers:
 
@@ -15,7 +15,7 @@ Declared peers:
 - `@deepseek-ai/schemastery`: `^3.18.4 || ^3.18.5-alpha.1`.
 - The development SDK stays locked to `0.2.0-rc.2` (the `link:` overrides in `pnpm-lock.yaml` / `pnpm-workspace.yaml`) so the development environment is reproducible; that lock does not narrow where the plugin may run.
 
-Library versions actually exercised with the same tarball:
+Library versions actually exercised with the one candidate tarball:
 
 | Host | Runtime | Cordis | Schemastery |
 | --- | --- | --- | --- |
@@ -56,7 +56,7 @@ See [docs/images](docs/images/README.md) for the files and their provenance note
 
 Runtime dependencies are the Host's `sessionPersistence`, `storageDomain`, Typert Remote, `settings.section` and native UI primitives. The plugin does not call Missher-only extension APIs and needs no separate compatibility plugin.
 
-**Exercised for 0.2.2**: the same tarball was installed, booted, snapshotted, rebuilt from a v3 derived cache into v4, restarted, removed and reinstalled in separate processes on the Missher community rc.2, the Missher community alpha.2 and the plain official npm runtime 0.2.1-alpha.5. Durable session bytes and cache bytes were preserved, cache domain 1 / row 4 is unchanged, the installer used pnpm 11.7.0, each profile was isolated with empty credentials, and no model request was submitted. The real Web settings-page review ran **only** on the plain official 0.2.1-alpha.5 runtime (Linux x64).
+**Exercised for the 0.2.2 candidate**: the same tarball was installed, booted, snapshotted, rebuilt from a v3 derived cache into v4, restarted, removed and reinstalled in separate processes on the Missher community rc.2, the Missher community alpha.2 and the plain official npm runtime 0.2.1-alpha.5. Durable session bytes and cache bytes were preserved, cache domain 1 / row 4 is unchanged, the installer used pnpm 11.7.0, each profile was isolated with empty credentials, and no model request was submitted. The real Web settings-page review ran **only** on the plain official 0.2.1-alpha.5 runtime (Linux x64).
 
 **Not verified in this round**: the native daily Electron surface, macOS, Windows, Apple Silicon and other host versions. Desktop application tests are not treated as plugin tests. See [VALIDATION.md](VALIDATION.md) for the layer table.
 

@@ -4,9 +4,9 @@
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
 
-独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前版本为 **0.2.2**：已在三个真实宿主上完成安装、Loader 与安装生命周期验收（真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成）。成品与校验值请从 Releases 获取。
+独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前源码候选版本为 **0.2.2**：已在三个真实宿主上完成安装、Loader 与安装生命周期验收（真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成），**尚未发布**；可下载的公开版本仍是 **0.2.1**，以 Releases 为准。
 
-## 兼容范围（0.2.2）
+## 兼容范围（0.2.2 候选）
 
 peer 声明：
 
@@ -56,7 +56,7 @@ peer 声明：
 
 运行时依赖宿主的 `sessionPersistence`、`storageDomain`、Typert Remote、`settings.section` 和原生 UI primitives；插件不调用 Missher 专属扩展接口，也不需要额外兼容插件。
 
-**0.2.2 已实测**：同一份 tgz 在 Missher 配套 rc.2、Missher 配套 alpha.2 与纯官方 npm runtime 0.2.1-alpha.5 上分别进程隔离安装、启动、读取快照、从 v3 派生缓存重建 v4、重启、卸载并重装；原始会话字节与缓存字节保持一致，缓存域 1 / 行 4 不变，安装使用 pnpm 11.7.0，profile 独立且空凭据，未提交模型请求。真实 Web 设置页验收在纯官方 0.2.1-alpha.5（Linux x64）完成。
+**0.2.2 候选已实测**：同一份 tgz 在 Missher 配套 rc.2、Missher 配套 alpha.2 与纯官方 npm runtime 0.2.1-alpha.5 上分别进程隔离安装、启动、读取快照、从 v3 派生缓存重建 v4、重启、卸载并重装；原始会话字节与缓存字节保持一致，缓存域 1 / 行 4 不变，安装使用 pnpm 11.7.0，profile 独立且空凭据，未提交模型请求。真实 Web 设置页验收在纯官方 0.2.1-alpha.5（Linux x64）完成。
 
 **本轮未验证**：原生日常 Electron 界面、macOS、Windows、Apple Silicon、其他宿主版本。桌面应用自身的跨平台测试不计入本插件测试。分层结果见 [VALIDATION.md](VALIDATION.md)。
 
