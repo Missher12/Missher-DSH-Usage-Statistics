@@ -71,11 +71,10 @@ function partialText(
 }
 
 /** Shared page heading kept stable across loading, ready, and error states. */
-function PageHeader({ title, intro }: { title: string; intro: string }): ReactNode {
+function PageHeader({ title }: { title: string; intro: string }): ReactNode {
   return (
     <header className={css.pageHeader}>
       <h2 className={css.pageTitle}>{title}</h2>
-      <p className={css.pageIntro}>{intro}</p>
     </header>
   )
 }

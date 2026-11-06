@@ -1,5 +1,6 @@
 # DeepSeek Harness 使用统计
 
+当前版本 **1.0.0** · [同版安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v1.0.0)
 [English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。

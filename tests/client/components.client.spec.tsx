@@ -83,16 +83,14 @@ describe('UsageInsightsSection', () => {
     expect(screen.getByRole('tabpanel').style.getPropertyValue('--usage-particle-color')).toContain('--dsw-alias-state-business-primary')
   })
 
-  it('keeps the native page title and description visible across loading and ready states', async () => {
+  it('keeps the native page title visible across loading and ready states', async () => {
     const deferred = Promise.withResolvers<UsageInsightsSnapshot>()
     render(<UsageInsightsSection {...props(() => deferred.promise)} />)
 
     expect(screen.getByRole('heading', { name: en.section, level: 2 })).toBeTruthy()
-    expect(screen.getByText(en.sectionIntro)).toBeTruthy()
 
     await act(async () => { deferred.resolve(SNAPSHOT); await deferred.promise })
     expect(screen.getByRole('heading', { name: en.section, level: 2 })).toBeTruthy()
-    expect(screen.getByText(en.sectionIntro)).toBeTruthy()
   })
 
   it('ends a never-settling first-load skeleton and allows a successful retry', async () => {

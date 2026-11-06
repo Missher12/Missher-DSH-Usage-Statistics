@@ -1,6 +1,6 @@
 {
   "name": "@missher/dsh-usage-statistics",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.",
   "type": "module",
   "license": "MIT",
