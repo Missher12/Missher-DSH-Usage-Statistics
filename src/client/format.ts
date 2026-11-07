@@ -12,6 +12,14 @@ export function formatCompactNumber(value: number, locale: string): string {
     maximumFractionDigits: 1,
   }).format(value)
 }
+
+/** Localize the statistics zone at the snapshot time, including daylight saving. */
+export function formatTimeZone(timeZone: string, locale: string, time: number): string {
+  return new Intl.DateTimeFormat(locale, { timeZone, timeZoneName: 'long' })
+    .formatToParts(time)
+    .find(part => part.type === 'timeZoneName')?.value ?? timeZone
+}
+
 /**
  * Render a completed duration without implying sub-minute precision.
  * @param value - Completed duration in milliseconds.

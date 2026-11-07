@@ -3,7 +3,7 @@ import { Tooltip } from '@deepseek-ai/dsh-client-ui-primitives'
 import { usageDateKey } from '../calendar.ts'
 import type { UsageInsightsSnapshot } from '../types.ts'
 import type { UsageInsightsSectionProps } from './UsageInsightsSection.tsx'
-import { formatCompactNumber } from './format.ts'
+import { formatCompactNumber, formatTimeZone } from './format.ts'
 import css from './UsageInsightsSection.module.css'
 
 const clock = (hour: number): string => `${String(hour).padStart(2, '0')}:00`
@@ -66,13 +66,13 @@ export function HourlyActivity({ snapshot, locale, t, refresh, refreshing }: {
             </Tooltip>
           ))}
         </div>
-      </div>
-      <div className={css.hourlyAxis} aria-hidden="true">
-        {tokens.map((_, hour) => <span key={hour}>{hour % 3 === 0 || hour === 23 ? String(hour).padStart(2, '0') : ''}</span>)}
+        <div className={css.hourlyAxis} aria-hidden="true">
+          {tokens.map((_, hour) => <span key={hour}>{hour % 3 === 0 || hour === 23 ? String(hour).padStart(2, '0') : ''}</span>)}
+        </div>
       </div>
       <div className={css.hourlyFooter}>
         <span>{maximum === 0 ? t('hourlyEmpty') : `${t('hourlyPeak')} ${clock(peak)}–${clock(peak + 1)} · ${exact.format(maximum)} Token`}</span>
-        <span>{snapshot.timeZone}</span>
+        <span title={snapshot.timeZone}>{formatTimeZone(snapshot.timeZone, locale, snapshot.generatedAt)}</span>
       </div>
     </section>
   )
