@@ -2,6 +2,8 @@
 
 <h1>DSH Usage Statistics · 使用统计</h1>
 
+<p><img src="../docs/images/overview.svg" alt="Usage Statistics 功能示意" width="100%"></p>
+
 <p>把已有会话的 Token 用量、活动与常用工具看清楚。</p>
 
 <p>
@@ -15,6 +17,10 @@
 
 ---
 
+<!-- current-source -->
+当前开发源码：**1.0.0** · [分支 `main`](https://github.com/Missher12/Missher-DSH-Usage-Statistics/tree/main)。安装包以实际 Release 为准。
+<!-- /current-source -->
+
 ## 功能一览
 
 | 能做什么 | 说明 |
@@ -23,6 +29,14 @@
 | **每日与小时活动** | 53 周活动图和今天 0–23 点的小时分布。 |
 | **模型与工具** | 查看历史常用模型、思考强度以及工具和 Skill 排行。 |
 | **阅读与配色** | 深浅主题、颜色预设、自定义配色及精确用量提示。 |
+
+<!-- existing-screenshots -->
+## 界面示例
+
+<table><tr><td><a href="../docs/images/usage-0.2.2-light.png"><img src="../docs/images/usage-0.2.2-light.png" alt="浅色主界面：累计用量、53×7 颗粒图与设置区块" width="100%"></a></td><td><a href="../docs/images/usage-0.2.2-hourly-dark.png"><img src="../docs/images/usage-0.2.2-hourly-dark.png" alt="深色主题：小时活动柱状图与悬停用量提示" width="100%"></a></td></tr></table>
+
+<sub>来自项目已有文档；截图版本与验证范围见<a href="../README.md">原始说明</a>，点击可放大。</sub>
+<!-- /existing-screenshots -->
 
 ## 快速开始
 
