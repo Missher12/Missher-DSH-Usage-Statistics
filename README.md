@@ -1,11 +1,11 @@
 # DeepSeek Harness 使用统计
 
-当前版本 **1.0.0** · [同版安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v1.0.0)
+当前版本 **1.0.1** · [同版安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v1.0.1)
 [English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
 
-独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。当前版本为 **0.2.2**：已在三个真实宿主上完成安装、Loader 与安装生命周期验收（真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成）。成品与校验值请从 Releases 获取。
+独立、可卸载的 Harness Bundle，包名 `@missher/dsh-usage-statistics`。安装并启用后打开 **设置 → 使用统计**，查看已有记录不需要 API Key。**0.2.2 阶段**已在三个真实宿主上完成安装、Loader 与安装生命周期验收（真实 Web 界面验收只在纯官方 0.2.1-alpha.5 上完成）。成品与校验值请从 Releases 获取。
 
 ## 兼容范围（0.2.2）
 

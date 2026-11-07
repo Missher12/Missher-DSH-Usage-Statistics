@@ -4,7 +4,7 @@
 
 Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.
 
-An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. The current version is **0.2.2**: installation, Loader and install-lifecycle acceptance ran on three real hosts, while the real Web interface was reviewed only on the plain official 0.2.1-alpha.5 runtime. See Releases for the installable archive and checksums.
+An independently installable, removable Harness Bundle named `@missher/dsh-usage-statistics`. Open **Settings → Usage Statistics** after enabling it. Reading existing records does not require an API key. During the **0.2.2** stage, installation, Loader and install-lifecycle acceptance ran on three real hosts, while the real Web interface was reviewed only on the plain official 0.2.1-alpha.5 runtime. See Releases for the installable archive and checksums.
 
 ## Compatibility range (0.2.2)
 
