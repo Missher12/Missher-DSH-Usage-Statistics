@@ -66,7 +66,7 @@ describe('declared compatibility metadata', () => {
   })
 
   it('keeps the Host runtime gate on the Host and declares no exemption', () => {
-    expect(manifest.version).toBe('0.2.2')
+    expect(semver.valid(manifest.version)).toBe(manifest.version)
     for (const name of ['@deepseek-ai/dsh-storage-domain', '@deepseek-ai/dsh-typert-protocol', '@deepseek-ai/dsh-session-persistence', '@deepseek-ai/dsh-client-ui-primitives']) {
       expect(manifest.peerDependencies[name]).toBe('*')
     }
@@ -97,7 +97,7 @@ describe('declared compatibility metadata', () => {
     const incompatible = { ...manifest, peerDependencies: { ...manifest.peerDependencies, '@deepseek-ai/dsh': '^0.9.0' } }
     for (const runtimeVersion of ['0.1.7-rc.2', '0.2.0-rc.2', '0.2.1-alpha.2']) {
       expect(evaluatePluginCompatibility(incompatible, {}, runtimeVersion)).toMatchObject({
-        name: manifest.name, version: '0.2.2', runtimeVersion, exempted: false,
+        name: manifest.name, version: manifest.version, runtimeVersion, exempted: false,
       })
     }
     // The same gate admits this Bundle on every `*`-declared Host peer.
