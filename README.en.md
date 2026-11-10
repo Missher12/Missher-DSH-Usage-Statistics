@@ -1,5 +1,7 @@
 # DeepSeek Harness Usage Statistics
 
+![Usage Statistics · 用量统计（品牌插画）](docs/images/cover-v2.png)
+
 [简体中文](README.md) · [Downloads](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [Desktop application](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 Local session and Token statistics with daily and hourly activity charts for DeepSeek Harness.

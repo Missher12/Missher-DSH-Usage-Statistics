@@ -2,7 +2,7 @@
 
 <h1>DSH Usage Statistics · 使用统计</h1>
 
-<p><img src="../docs/images/overview.svg" alt="Usage Statistics 功能示意" width="100%"></p>
+<p><img src="../docs/images/cover-v2.png" alt="Usage Statistics · 用量统计（品牌插画）" width="100%"></p>
 
 <p>把已有会话的 Token 用量、活动与常用工具看清楚。</p>
 

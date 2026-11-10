@@ -1,5 +1,7 @@
 # DeepSeek Harness 使用统计
 
+![Usage Statistics · 用量统计（品牌插画）](docs/images/cover-v2.png)
+
 当前版本 **1.0.1** · [同版安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v1.0.1)
 [English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
