@@ -80,8 +80,10 @@ const rowSchema: z.ZodType<SessionUsageRow> = z.object({
   tools: countRecordSchema,
 }).strict()
 
+// Rebuild older rows so historical nested tool calls are included.
+const CACHE_ROW_VERSION = 5
 const cacheRecordSchema = z.object({
-  schemaVersion: z.literal(4),
+  schemaVersion: z.literal(CACHE_ROW_VERSION),
   revision: z.string(),
   createdAt: countSchema,
   timeZone: z.string(),
@@ -251,7 +253,7 @@ export class UsageStatistics extends TypertRemoteService {
         await handle.close()
       }
       const record: CacheRecord = {
-        schemaVersion: 4,
+        schemaVersion: CACHE_ROW_VERSION,
         revision,
         createdAt: handle.header.createdAt,
         timeZone,

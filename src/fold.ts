@@ -163,7 +163,7 @@ export function foldSessionUsage(
       }
     }
 
-    if (type === 'tool/call' || type === 'tool/code-dispatch-start') {
+    if (type === 'tool/call' || type === 'tool/ptc-dispatch-start' || type === 'tool/code-dispatch-start') {
       const name = data.name
       if (typeof name === 'string' && name.length > 0) {
         increment(tools, name)

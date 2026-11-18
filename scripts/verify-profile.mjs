@@ -94,12 +94,12 @@ async function protectedSessions(dir, result={}) {
 try {
   await bootAndRead('installed')
   const before=await protectedSessions(join(home,'sessions'))
-  // Preserve the v1 domain / v4 derived rows across process and Bundle lifetimes.
+  // Preserve the v1 domain / v5 derived rows across process and Bundle lifetimes.
   const cachePath=join(home,'storages','missher_usage_statistics.json')
   const cacheBefore=await readFile(cachePath)
   const cache=JSON.parse(cacheBefore)
   assert.deepEqual(cache.unit,{name:'missher_usage_statistics',version:1})
-  assert.equal(cache.tables.sessions['usage-statistics-validation-v4'].schemaVersion,4)
+  assert.equal(cache.tables.sessions['usage-statistics-validation-v4'].schemaVersion,5)
   // Simulate a valid previous-release cache. Only derived facts may be rebuilt.
   const legacy=structuredClone(cache)
   legacy.tables.sessions['usage-statistics-validation-v4'].schemaVersion=3
@@ -122,7 +122,7 @@ try {
   assert.deepEqual(await readFile(cachePath),cacheBefore)
   assert.deepEqual(await protectedSessions(join(home,'sessions')),before)
   await writeFile(patch,'[]\n')
-  const report={runtime,pnpmVersion,version:manifest.version,installKind:label,profileWork:work,artifactSha256:createHash('sha256').update(await readFile(artifact)).digest('hex'),install:true,loaderBoot:true,hostSnapshotRead:true,syntheticTokens:30_000,cacheHitRate:0.76,uninstallRestoresBase:true,pluginServiceRemoved:true,sessionBytesUnchanged:true,cacheDomainVersion:1,cacheRowVersion:4,legacyV3RebuiltWithoutSessionWrites:true,hourlyTokens:30_000,cacheBytesUnchangedAfterRestartRemoveReinstall:true,reinstallRestoresStatistics:true,realModel:false}
+  const report={runtime,pnpmVersion,version:manifest.version,installKind:label,profileWork:work,artifactSha256:createHash('sha256').update(await readFile(artifact)).digest('hex'),install:true,loaderBoot:true,hostSnapshotRead:true,syntheticTokens:30_000,cacheHitRate:0.76,uninstallRestoresBase:true,pluginServiceRemoved:true,sessionBytesUnchanged:true,cacheDomainVersion:1,cacheRowVersion:5,legacyV3RebuiltWithoutSessionWrites:true,hourlyTokens:30_000,cacheBytesUnchangedAfterRestartRemoveReinstall:true,reinstallRestoresStatistics:true,realModel:false}
   await writeFile(join(root,`verification/profile-${label}.json`),JSON.stringify(report,null,2)+'\n')
   console.log(JSON.stringify(report,null,2))
 } finally {await stop()}

@@ -18,7 +18,7 @@
 ---
 
 <!-- current-source -->
-当前开发源码：**1.0.1** · [分支 `main`](https://github.com/Missher12/Missher-DSH-Usage-Statistics/tree/main)。安装包以实际 Release 为准。
+当前开发源码：**1.0.2** · [分支 `main`](https://github.com/Missher12/Missher-DSH-Usage-Statistics/tree/main)。安装包以实际 Release 为准。
 <!-- /current-source -->
 
 ## 功能一览

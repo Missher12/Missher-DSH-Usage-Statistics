@@ -145,6 +145,13 @@ describe('foldSessionUsage', () => {
   })
 
   it('counts human activity, model settings, direct and nested tools, and skills', () => {
+    const ptcCall = {
+      rootCallId: 'call-5',
+      parentCallId: 'call-5',
+      subCallId: 'call-5:ptc:1',
+      name: 'list_files',
+      arguments: {},
+    }
     const events = [
       event(0, '2026-03-01T10:00:00.000Z', 'user/message', {
         id: 'human' as never,
@@ -197,6 +204,10 @@ describe('foldSessionUsage', () => {
         name: 'skill',
         arguments: '{not-json',
       }),
+      event(8, '2026-03-01T10:00:07.000Z', 'tool/ptc-dispatch-start' as never, ptcCall as never),
+      event(9, '2026-03-01T10:00:08.000Z', 'tool/ptc-dispatch' as never, {
+        ...ptcCall, isError: false, content: [],
+      } as never),
     ]
 
     const row = foldSessionUsage(header(), events, 'UTC')
@@ -205,12 +216,12 @@ describe('foldSessionUsage', () => {
       date: '2026-03-01',
       humanMessages: 1,
       tokens: 0,
-      toolCalls: 4,
+      toolCalls: 5,
     }])
     expect(row.models).toEqual({ 'deepseek/deepseek-v4-flash': 1 })
     expect(row.reasoningEfforts).toEqual({ max: 1 })
     expect(row.skills).toEqual({ playwright: 1, preview: 1 })
-    expect(row.tools).toEqual({ bash: 1, read_file: 1, skill: 2 })
+    expect(row.tools).toEqual({ bash: 1, list_files: 1, read_file: 1, skill: 2 })
   })
 
   it('excludes the inherited fork prefix using the durable seed length', () => {

@@ -96,7 +96,7 @@ Only readable sessions in the current Harness data directory are included. This 
 - Cache hit rate is cache-read Tokens divided by all input Tokens. Session duration sums completed turns' active durations, excluding idle time between turns.
 - Model and reasoning-effort values describe recorded history, not current defaults or declared model capabilities. The combined tool/skill ranking shows the top five entries.
 
-The Host reads through the session persistence service and writes only the plugin's rebuildable `missher_usage_statistics` cache (domain 1, row format 4). The browser stores a snapshot and color preference. The plugin does not scan private log formats directly, edit original sessions, or repair/migrate historical logs. Unreadable records are reported as omitted.
+The Host reads through the session persistence service and writes only the plugin's rebuildable `missher_usage_statistics` cache (domain 1, row format 5). Version 1.0.2 rebuilds older rows to include nested tool calls recorded by newer hosts. The browser stores a snapshot and color preference. The plugin does not scan private log formats directly, edit original sessions, or repair/migrate historical logs. Unreadable records are reported as omitted.
 
 It registers no model tools, adds no prompts, calls no model and uploads no statistics. It does not provide cross-device sync, cost forecasts or current-session context management. Large histories may take longer to scan; the default refresh budget is 12 seconds. Advanced options are `timeZone` (an IANA time zone) and `refreshTimeoutMs` (10–60000 milliseconds).
 

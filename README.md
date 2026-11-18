@@ -2,7 +2,7 @@
 
 ![Usage Statistics · 用量统计（品牌插画）](docs/images/cover-v2.png)
 
-当前版本 **1.0.1** · [同版安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases/tag/v1.0.1)
+当前源码 **1.0.2** · [已发布版本与安装包](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases)
 [English](README.en.md) · [下载成品](https://github.com/Missher12/Missher-DSH-Usage-Statistics/releases) · [桌面端](https://github.com/Missher12/Missher-DeepseekHarness-Desktop)
 
 汇总本地会话的 Token 用量、每日与小时活动，以及模型、工具和技能使用情况。
@@ -84,7 +84,7 @@ DSH peer 保留 `*`，不会仅凭版本号拒绝宿主；这不代表所有版�
 - 缓存命中率 = 缓存读取 Token / 全部输入 Token。最长会话只合计已完成轮次的有效耗时，不含轮次间空闲。
 - 模型/推理强度表示历史记录里最常用的值，不代表当前默认设置或模型能力。工具与技能混合排行只展示前 5 项。
 
-Host 经宿主持久化服务读取记录，只写本插件的 `missher_usage_statistics` 派生缓存（域 1、行 4）。浏览器保存统计快照和颜色偏好；旧缓存可重新生成。它不直接扫描私有日志格式，不修改原始会话，不修复或迁移历史日志。不可读记录会显示为省略。
+Host 经宿主持久化服务读取记录，只写本插件的 `missher_usage_statistics` 派生缓存（域 1、行 5）。1.0.2 重新统计旧缓存，将新版宿主记录的嵌套工具调用纳入排行。浏览器保存统计快照和颜色偏好。它不直接扫描私有日志格式，不修改原始会话，不修复或迁移历史日志。不可读记录会显示为省略。
 
 插件不注册模型工具、不注入提示词、不调用模型，也不向外部上传统计。它没有跨设备同步、费用预测或当前会话上下文管理功能。大量历史记录首次统计可能较慢；默认刷新预算为 12 秒。高级配置 `timeZone` 可指定 IANA 时区，`refreshTimeoutMs` 范围为 10–60000 毫秒。
 
